@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare — Heinnsof</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --principal:#8C0032; --dark-blue:#0D1826; --wine-rose:#A63D52; --gray-blue:#627896; --black:#1A1A1A; --body-text:#3D3D3D; --muted:#767676; --rule:#E5E5E5; --light-bg:#F5F5F5; --footer-bg:#07101B; --font:'Inter',sans-serif; --ease:0.25s cubic-bezier(0.4,0,0.2,1); }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font); font-weight:300; color:var(--body-text); background:#fff; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; color:inherit; }
+    img { display:block; max-width:100%; }
+    button { font-family:var(--font); cursor:pointer; }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s var(--ease),transform 0.6s var(--ease); }
+    .reveal.visible { opacity:1; transform:none; }
+    .d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}.d4{transition-delay:0.32s;}
+    .btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:0.05em;padding:13px 28px;border:1px solid transparent;transition:background var(--ease),color var(--ease),border-color var(--ease);}
+    .btn-primary{background:var(--principal);color:#fff;border-color:var(--principal);}.btn-primary:hover{background:var(--wine-rose);border-color:var(--wine-rose);}
+    .btn-white{background:#fff;color:var(--principal);border-color:#fff;}.btn-white:hover{background:transparent;color:#fff;border-color:#fff;}
+    .btn-ghost-white{background:transparent;color:#fff;border-color:rgba(255,255,255,0.5);}.btn-ghost-white:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
+    .btn-ghost-dark{background:transparent;color:var(--principal);border-color:var(--principal);}.btn-ghost-dark:hover{background:var(--principal);color:#fff;}
+    #nav{position:fixed;inset:0 0 auto;z-index:1000;background:#fff;border-bottom:1px solid var(--rule);transition:transform var(--ease),box-shadow var(--ease);overflow:visible;}
+    #nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,0.06);}#nav.hidden{transform:translateY(-100%);}
+    .nav-inner{max-width:1240px;margin:0 auto;padding:0 72px;height:72px;display:flex;align-items:center;gap:32px;overflow:hidden;}
+    .nav-logo img{height:48px;}.nav-links{display:flex;align-items:center;gap:22px;list-style:none;flex:1;}
+    .nav-links a{font-size:13px;font-weight:400;color:var(--black);position:relative;padding-bottom:2px;transition:color var(--ease);}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--principal);transition:width var(--ease);}
+    .nav-links a:hover{color:var(--principal);}.nav-links a:hover::after{width:100%;}
+    .nav-search{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:none;border:none;color:var(--black);cursor:pointer;transition:color var(--ease);}
+    .nav-search:hover{color:var(--principal);}.nav-search svg{width:18px;height:18px;}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;}
+    .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--black);transition:transform var(--ease),opacity var(--ease);}
+    .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+    .nav-hamburger.open span:nth-child(2){opacity:0;}
+    .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+    .nav-mobile{display:none;flex-direction:column;background:#fff;border-top:1px solid var(--rule);padding:8px 24px 24px;}
+    .nav-mobile.open{display:flex;}.nav-mobile a{font-size:15px;color:var(--black);padding:14px 0;border-bottom:1px solid var(--rule);transition:color var(--ease);}
+    .nav-mobile a:last-child{border-bottom:none;}.nav-mobile a:hover{color:var(--principal);}
+    .has-drop{position:static;}.has-drop>a{display:inline-flex!important;align-items:center;gap:4px;}
+    .has-drop>a::after{display:none!important;}.nav-chevron{width:10px;height:10px;flex-shrink:0;transition:transform 0.2s;color:var(--muted);}
+    .has-drop.is-open>a .nav-chevron{transform:rotate(180deg);}
+    .mega-drop{position:fixed;top:72px;left:0;width:100%;background:#fff;border-top:2px solid var(--principal);border-bottom:1px solid var(--rule);box-shadow:0 20px 60px rgba(0,0,0,0.10);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity 0.22s,transform 0.22s,visibility 0.22s;z-index:997;pointer-events:none;}
+    .mega-drop.is-open{opacity:1;visibility:visible;transform:translateY(0);pointer-events:all;}
+    .mega-inner{max-width:1240px;margin:0 auto;padding:40px 72px;display:grid;gap:48px;align-items:start;}
+    .md-eyebrow{display:block;font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--rule);margin-bottom:18px;}
+    .md-links{list-style:none;display:flex;flex-direction:column;gap:8px;}
+    .md-links li a{font-size:13.5px!important;font-weight:400!important;color:var(--body-text)!important;display:flex!important;padding:4px 0;transition:color 0.18s,padding-left 0.18s!important;position:relative;}
+    .md-links li a::before{content:'→';font-size:11px;color:var(--principal);opacity:0;width:0;overflow:hidden;transition:opacity 0.18s,width 0.18s,margin-right 0.18s;display:inline-block;}
+    .md-links li a::after{display:none!important;}.md-links li a:hover{color:var(--principal)!important;padding-left:4px;}
+    .md-links li a:hover::before{opacity:1;width:14px;margin-right:6px;}
+    @media(max-width:768px){.mega-drop{display:none!important;}}
+    .nav-actions{display:flex;align-items:center;gap:4px;flex-shrink:0;}.nav-lang{position:relative;}
+    .lang-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--black);background:none;border:none;cursor:pointer;padding:6px 8px;border-radius:4px;transition:background 0.18s,color 0.18s;font-family:inherit;letter-spacing:0.04em;}
+    .lang-btn:hover,.lang-btn.is-open{background:rgba(0,0,0,0.04);color:var(--principal);}
+    .lang-drop{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid var(--rule);border-top:2px solid var(--principal);box-shadow:0 12px 40px rgba(0,0,0,0.10);min-width:148px;list-style:none;padding:0;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity 0.2s,transform 0.2s,visibility 0.2s;z-index:998;}
+    .lang-drop.is-open{opacity:1;visibility:visible;transform:translateY(0);}
+    .lang-drop li a{display:block;font-size:13px;font-weight:400;color:var(--body-text);padding:9px 16px;transition:background 0.15s,color 0.15s;}
+    .lang-drop li a:hover{background:var(--light-bg);color:var(--principal);}
+    #search-overlay{position:fixed;inset:0;z-index:1100;opacity:0;visibility:hidden;transition:opacity 0.2s ease,visibility 0.2s ease;}
+    #search-overlay.is-open{opacity:1;visibility:visible;}
+    .search-backdrop{position:absolute;inset:0;background:rgba(13,24,38,0.75);backdrop-filter:blur(5px);}
+    .search-panel{position:absolute;top:72px;left:50%;transform:translateX(-50%);width:min(640px,92vw);background:#fff;border:1px solid var(--rule);border-top:3px solid var(--principal);box-shadow:0 32px 80px rgba(0,0,0,0.22);}
+    .search-input-row{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--rule);}
+    .search-input-row svg{width:18px;height:18px;color:var(--muted);flex-shrink:0;}
+    #search-input{flex:1;border:none;outline:none;font-family:var(--font);font-size:16px;color:var(--body-text);background:transparent;}
+    #search-input::placeholder{color:var(--muted);}
+    #search-close{background:none;border:none;font-size:18px;color:var(--muted);cursor:pointer;padding:4px;transition:color 0.25s;}
+    #search-close:hover{color:var(--principal);}
+    .search-results{max-height:380px;overflow-y:auto;}
+    .sr-item{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid var(--rule);transition:background 0.2s;gap:12px;}
+    .sr-item:last-child{border-bottom:none;}.sr-item:hover{background:var(--light-bg);}
+    .sr-category{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--principal);min-width:90px;}
+    .sr-title{font-size:14px;font-weight:500;color:var(--body-text);}
+    .sr-empty{padding:24px 20px;font-size:14px;color:var(--muted);}
+    footer{background:#07101B;border-top:1px solid rgba(255,255,255,0.07);padding:72px 0 0;}
+    .footer-inner{max-width:1240px;margin:0 auto;padding:0 72px;}
+    .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-bottom:56px;}
+    .footer-col-group{display:flex;flex-direction:column;gap:12px;}
+    .footer-col-title{display:block;font-size:12px;font-weight:600;color:#fff;margin-bottom:4px;letter-spacing:0.02em;}
+    .footer-col-link{display:block;font-size:12px;font-weight:300;color:rgba(255,255,255,0.42);transition:color .2s;line-height:1.5;}
+    .footer-col-link:hover{color:rgba(255,255,255,0.9);}
+    .footer-col-link--icon{display:flex;align-items:center;gap:8px;}
+    .footer-col-link--icon svg{width:14px;height:14px;flex-shrink:0;fill:currentColor;}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);max-width:1240px;margin:0 auto;padding:20px 72px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .footer-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,0.22);}
+    .footer-tagline{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:300;color:rgba(255,255,255,0.45);}
+    .footer-iso-logo{height:24px;width:auto;opacity:0.65;flex-shrink:0;}
+    .sector-hero{background:linear-gradient(155deg,#07101b 0%,#0D1826 55%,#1a0812 100%);padding:148px 0 80px;position:relative;overflow:hidden;}
+    .sector-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+    .sh{max-width:1240px;margin:0 auto;padding:0 72px;position:relative;z-index:1;}
+    .s-eyebrow{display:block;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--principal);margin-bottom:20px;}
+    .s-headline{font-size:clamp(36px,4.5vw,64px);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px;max-width:760px;}
+    .s-desc{font-size:17px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.75;max-width:600px;margin-bottom:40px;}
+    .s-anchors{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;}
+    .s-anchor{font-size:12px;font-weight:500;letter-spacing:0.08em;color:rgba(255,255,255,0.45);padding:8px 24px 8px 0;margin-right:24px;border-right:1px solid rgba(255,255,255,0.12);transition:color .2s;}
+    .s-anchor:last-child{border-right:none;}.s-anchor:hover{color:#fff;}
+    .focus-section{background:#fff;padding:80px 0;border-bottom:1px solid var(--rule);}
+    .s-section-eyebrow{display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--principal);margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--rule);}
+    .focus-list{display:flex;flex-direction:column;gap:0;}
+    .focus-item{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:28px 0;border-bottom:1px solid var(--rule);}
+    .focus-item:last-child{border-bottom:none;}
+    .focus-title{font-size:15px;font-weight:700;color:var(--black);line-height:1.4;}
+    .focus-desc{font-size:14px;font-weight:300;color:var(--body-text);line-height:1.75;padding-top:2px;}
+    .cap-section{background:var(--dark-blue);padding:80px 0;}
+    .cap-headline{font-size:clamp(24px,2.8vw,40px);font-weight:700;color:#fff;margin-bottom:48px;max-width:600px;letter-spacing:-0.5px;}
+    .cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+    .cap-item{border-left:2px solid var(--principal);padding-left:20px;}
+    .cap-item-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:8px;}
+    .cap-item-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.65;}
+    .work-section{background:#fff;padding:80px 0;}
+    .work-header{padding-bottom:24px;border-bottom:1px solid var(--rule);margin-bottom:0;}
+    .work-header-title{font-size:clamp(22px,2.5vw,36px);font-weight:700;color:var(--black);letter-spacing:-0.5px;}
+    .work-row{display:grid;grid-template-columns:1fr 1fr;min-height:360px;}
+    .work-row+.work-row{border-top:1px solid var(--rule);}
+    .work-panel{background:var(--dark-blue);background-size:cover;background-position:center;position:relative;overflow:hidden;}
+    .work-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.18) 0%,rgba(0,0,0,0.45) 100%);}
+    .work-text{padding:56px 64px;display:flex;flex-direction:column;justify-content:center;}
+    .work-label{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--principal);margin-bottom:16px;}
+    .work-title{font-size:20px;font-weight:700;color:var(--black);margin-bottom:16px;line-height:1.3;}
+    .work-body{font-size:14px;font-weight:300;color:var(--muted);line-height:1.75;}
+    .stats-section{background:var(--light-bg);padding:80px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+    .s-stat{padding:0 40px 0 0;border-right:1px solid var(--rule);}
+    .s-stat:first-child{padding-left:0;}.s-stat:last-child{border-right:none;}.s-stat:not(:first-child){padding-left:40px;}
+    .s-stat-num{font-size:clamp(40px,4.5vw,64px);font-weight:800;color:var(--principal);line-height:1;letter-spacing:-2px;margin-bottom:10px;}
+    .s-stat-lbl{font-size:13px;font-weight:300;color:var(--muted);}
+    .pub-section{background:var(--dark-blue);padding:72px 0;}
+    .pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .pub-eyebrow{display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--principal);margin-bottom:14px;}
+    .pub-title{font-size:clamp(18px,2.2vw,28px);font-weight:700;color:#fff;line-height:1.35;margin-bottom:14px;}
+    .pub-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:24px;}
+    .pub-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,0.25);padding-bottom:2px;transition:gap .2s,border-color .2s;}
+    .pub-link:hover{gap:14px;border-color:#fff;}
+    .pub-visual{background:linear-gradient(135deg,rgba(140,0,50,0.3),rgba(13,24,38,0.9));min-height:220px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:24px;}
+    .pub-visual-label{font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.14em;}
+    @media(max-width:1080px){.nav-inner,.sh,.footer-inner,.footer-bottom{padding-left:40px;padding-right:40px;}.stats-grid{grid-template-columns:repeat(2,1fr);row-gap:40px;}.s-stat{border-right:none;padding-left:0!important;}.s-stat:nth-child(odd){border-right:1px solid var(--rule);padding-right:40px;}.focus-item{grid-template-columns:1fr;gap:12px;}.cap-grid{grid-template-columns:1fr;}.pub-grid{gap:32px;}.footer-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){.nav-inner{padding:0 24px;overflow:hidden;}.nav-links,.nav-search{display:none;}.nav-hamburger{display:flex;}.sh{padding:0 24px;}.work-row{grid-template-columns:1fr;}.work-panel{min-height:200px;}.stats-grid{grid-template-columns:1fr 1fr;}.s-stat{border-right:none!important;padding:0!important;}.pub-grid{grid-template-columns:1fr;}.footer-inner{padding:0 24px;}.footer-grid{grid-template-columns:1fr;gap:32px;}.footer-bottom{padding:16px 24px;flex-direction:column;align-items:flex-start;}}
+  
+    /* Dynamic logo switching */
+    .logo-white { display:none; }
+    body.dark-hero #nav { background:transparent; border-bottom-color:transparent; box-shadow:none; transition:background 0.3s,border-color 0.3s,box-shadow 0.3s; }
+    body.dark-hero #nav .nav-links a { color:rgba(255,255,255,0.85); }
+    body.dark-hero #nav .nav-links a:hover { color:#fff; }
+    body.dark-hero #nav .nav-hamburger span { background:#fff; }
+    body.dark-hero #nav .nav-search { color:rgba(255,255,255,0.85); }
+    body.dark-hero #nav .lang-btn { color:rgba(255,255,255,0.85); }
+    body.dark-hero #nav .logo-color { display:none; }
+    body.dark-hero #nav .logo-white { display:block; }
+    body.dark-hero #nav .nav-chevron { color:rgba(255,255,255,0.6); }
+    body.dark-hero #nav.scrolled .nav-chevron { color:var(--muted); }
+    body.dark-hero #nav.scrolled { background:#fff; border-bottom:1px solid var(--rule); box-shadow:0 2px 16px rgba(0,0,0,0.06); }
+    body.dark-hero #nav.scrolled .nav-links a { color:var(--black); }
+    body.dark-hero #nav.scrolled .nav-hamburger span { background:var(--black); }
+    body.dark-hero #nav.scrolled .nav-search { color:var(--black); }
+    body.dark-hero #nav.scrolled .lang-btn { color:var(--black); }
+    body.dark-hero #nav.scrolled .logo-color { display:block; }
+    body.dark-hero #nav.scrolled .logo-white { display:none; }
+
+  
+
+    @media (max-width: 1080px) {
+      .nav-inner { padding: 0 32px !important; gap: 20px !important; height: 64px !important; overflow:hidden;}
+      .nav-logo img { height: 40px !important; }
+      .mega-drop { top: 64px !important; }
+    }
+    @media (max-width: 900px) {
+      .nav-inner { padding: 0 20px !important; gap: 12px !important; overflow:hidden;}
+      .nav-logo img { height: 36px !important; }
+      .nav-links { gap: 12px !important; }
+      .nav-links a { font-size: 12px !important; }
+    }
+
+    /* ── MOBILE OVERRIDES ── */
+    @media (max-width: 768px) {
+      /* Nav: shrink tall logo on mobile */
+      .nav-inner { height: 64px !important; padding: 0 20px !important; overflow:hidden;}
+      .nav-logo img { height: 40px !important; }
+      .nav-links, .nav-actions { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      /* Hero padding compensation for smaller nav */
+      .sector-hero, .svc-hero { padding: 110px 24px 60px !important; }
+      .p-hero { padding: 110px 24px 60px !important; }
+      .page-header { padding: 110px 24px 60px !important; }
+      /* Shell/container */
+      .sh { padding: 0 20px !important; }
+      .ph-shell, .contact-shell { padding: 0 20px !important; }
+      /* Grids → single column */
+      .split-grid, .work-row, .cap-grid, .help-grid,
+      .pub-grid, .focus-item, .about-img-grid,
+      .contact-shell, .form-row { grid-template-columns: 1fr !important; }
+      /* Work panels get a fixed height on mobile */
+      .work-panel { min-height: 240px !important; }
+      .about-img-cell { height: 260px !important; }
+      /* Text size clamp adjustments */
+      .s-headline, .svc-headline, .p-headline { font-size: clamp(28px, 8vw, 44px) !important; letter-spacing: -0.5px !important; }
+      .s-desc, .svc-desc, .p-desc { font-size: 15px !important; }
+      /* Footer */
+      .footer-inner, .footer-bottom { padding: 0 20px !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 20px !important; }
+      /* CTA band */
+      .cta-band { padding: 60px 20px !important; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      /* Anchors strip on mobile */
+      .s-anchors, .svc-anchors { gap: 0; flex-wrap: wrap; }
+      .s-anchor, .svc-anchor { font-size: 11px !important; padding: 6px 16px 6px 0 !important; }
+      /* Experts/leaders grids */
+      .experts-grid, .leaders-grid, .mission-grid { grid-template-columns: 1fr 1fr !important; }
+      /* Inline CTA */
+      .inline-cta-inner { flex-direction: column; align-items: flex-start; }
+      .inline-cta-actions { flex-direction: column; width: 100%; }
+      .inline-cta-actions .btn { width: 100%; justify-content: center; }
+      /* Diff cards */
+      .diff-grid { grid-template-columns: 1fr !important; }
+      /* Search panel */
+      .search-panel { top: 64px; width: 94vw; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+      .experts-grid, .leaders-grid, .mission-grid { grid-template-columns: 1fr !important; }
+      .form-row { grid-template-columns: 1fr !important; }
+    }
+
+  </style>
+</head>
+<body class="dark-hero">
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="Brand_assets/logo files/Logo Horizontal color.png" alt="Heinnsof" class="logo-color">
+      <img src="Brand_assets/logo files/Logo Horizontal white.png" alt="Heinnsof" class="logo-white">
+    </a>
+    <ul class="nav-links">
+      <li class="has-drop"><a href="what-we-do-overview.html" data-i18n="nav.whatWeDo">What We Do<svg class="nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 5,5 9,1"/></svg></a>
+        <div class="mega-drop"><div class="mega-inner" style="grid-template-columns:1fr 1fr;">
+          <div class="md-col"><span class="md-eyebrow" data-i18n="nav.howWeHelp">How We Help Clients</span><ul class="md-links">
+            <li><a href="what-we-do-overview.html" data-i18n="nav.overview">Overview</a></li>
+            <li><a href="service-grid-connection.html" data-i18n="nav.gridConnection">Grid Connection Acceleration</a></li>
+            <li><a href="service-alternative-power.html" data-i18n="nav.altPower">Alternative Power Coordination</a></li>
+            <li><a href="service-energy-masterplanning.html" data-i18n="nav.masterplanning">Energy Masterplanning &amp; Feasibility</a></li>
+            <li><a href="service-end-to-end-execution.html" data-i18n="nav.endToEnd">End-to-End Project Execution</a></li>
+            <li><a href="service-regulatory-navigation.html" data-i18n="nav.regulatory">Regulatory Navigation &amp; Stakeholder Management</a></li>
+          </ul></div>
+          <div class="md-col"><span class="md-eyebrow" data-i18n="nav.howWeWork">How We Work</span><ul class="md-links">
+            <li><a href="how-we-work-overview.html" data-i18n="nav.overview">Overview</a></li>
+            <li><a href="how-we-work-engagement.html" data-i18n="nav.engagementModel">Our Engagement Model</a></li>
+            <li><a href="how-we-work-technology-partners.html" data-i18n="nav.techPartners">Technology Partners</a></li>
+            <li><a href="how-we-work-execution.html" data-i18n="nav.executionApproach">Our Approach to Execution</a></li>
+          </ul></div>
+        </div></div>
+      </li>
+      <li class="has-drop"><a href="industries.html" data-i18n="nav.industries">Industries<svg class="nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 5,5 9,1"/></svg></a>
+        <div class="mega-drop"><div class="mega-inner" style="grid-template-columns:1fr;">
+          <div class="md-col"><span class="md-eyebrow" data-i18n="nav.sectors">Industries</span><ul class="md-links" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 48px;">
+            <li><a href="sector-data-centres.html" data-i18n="nav.dataCenters">Data Centers</a></li>
+            <li><a href="sector-ev-charging.html" data-i18n="nav.evCharging">EV Charging Networks</a></li>
+            <li><a href="sector-industrial.html" data-i18n="nav.industrial">Industrial &amp; Manufacturing</a></li>
+            <li><a href="sector-government.html" data-i18n="nav.government">Government &amp; Sovereign Infrastructure</a></li>
+            <li><a href="sector-chemicals.html" data-i18n="nav.chemicals">Chemicals</a></li></ul></div>
+        </div></div>
+      </li>
+      <li class="has-drop"><a href="insights.html" data-i18n="nav.insights">Insights<svg class="nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 5,5 9,1"/></svg></a>
+        <div class="mega-drop"><div class="mega-inner" style="grid-template-columns:1fr;">
+          <div class="md-col"><span class="md-eyebrow" data-i18n="nav.knowledgeResearch">Knowledge &amp; Research</span><ul class="md-links">
+            <li><a href="insights-reports.html" data-i18n="nav.reports">Reports &amp; Whitepapers</a></li>
+            <li><a href="insights-perspectives.html" data-i18n="nav.perspectives">Market Perspectives</a></li>
+            <li><a href="insights-case-studies.html" data-i18n="nav.caseStudies">Case Studies</a></li>
+          </ul></div>
+        </div></div>
+      </li>
+      <li class="has-drop"><a href="about-who-we-are.html" data-i18n="nav.aboutUs">About Us<svg class="nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 5,5 9,1"/></svg></a>
+        <div class="mega-drop"><div class="mega-inner" style="grid-template-columns:1fr;">
+          <div class="md-col"><span class="md-eyebrow" data-i18n="nav.ourFirm">Our Firm</span><ul class="md-links">
+            <li><a href="about-who-we-are.html" data-i18n="nav.whoWeAre">Who We Are</a></li>
+            <li><a href="about-leadership.html" data-i18n="nav.ourLeadership">Our Leadership</a></li>
+            <li><a href="about-mission-purpose.html" data-i18n="nav.missionPurpose">Mission &amp; Purpose</a></li>
+            <li><a href="about-governance.html" data-i18n="nav.governance">Our Governance</a></li>
+          </ul></div>
+        </div></div>
+      </li>
+          </ul></div>
+        </div></div>
+      </li>
+      <li class="has-drop"><a href="contact.html" data-i18n="nav.contact">Contact<svg class="nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 5,5 9,1"/></svg></a>
+        <div class="mega-drop"><div class="mega-inner" style="grid-template-columns:1fr;">
+          <div class="md-col"><span class="md-eyebrow" data-i18n="nav.getInTouch">Get in Touch</span><ul class="md-links">
+            <li><a href="contact.html" data-i18n="nav.getInTouchLink">Get in Touch</a></li>
+            <li><a href="contact.html#feasibility" data-i18n="nav.feasibility">Request a Feasibility Assessment</a></li>
+            <li><a href="contact.html#partner" data-i18n="nav.partner">Partner with Heinnsof</a></li>
+          </ul></div>
+        </div></div>
+      </li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg></button></div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="what-we-do-overview.html" class="mob-link" data-i18n="nav.whatWeDo">What We Do</a>
+    <a href="industries.html" class="mob-link" data-i18n="nav.industries">Industries</a>
+    <a href="insights.html" class="mob-link" data-i18n="nav.insights">Insights</a>
+    <a href="about-who-we-are.html" class="mob-link" data-i18n="nav.aboutUs">About Us</a>
+    <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
+    <a href="contact.html" class="mob-link" style="color:var(--principal);" data-i18n="nav.getInTouchLink">Get in Touch →</a>
+  </div>
+</nav>
+<div id="search-overlay" role="dialog" aria-label="Search" aria-modal="true">
+  <div class="search-backdrop"></div>
+  <div class="search-panel">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      <input type="search" id="search-input" placeholder="Search pages, services, sectors…" autocomplete="off">
+      <button id="search-close" aria-label="Close search">✕</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+<div class="sector-hero"><div class="sh">
+<span class="s-eyebrow reveal">HEALTHCARE</span>
+<h1 class="s-headline reveal d1">Critical Power Infrastructure for Healthcare Facilities</h1>
+<p class="s-desc reveal d2">Hospitals, medical research campuses, and integrated health systems require flawless power continuity. We help healthcare organisations secure the grid connections, resilience strategies, and energy infrastructure their patients depend on.</p>
+<div class="s-anchors reveal d3"><a href="#focus" class="s-anchor">Focus Areas</a><a href="#capabilities" class="s-anchor">Our Capabilities</a><a href="#our-work" class="s-anchor">Our Work</a></div>
+</div></div>
+<section id="focus" class="focus-section"><div class="sh"><span class="s-section-eyebrow">RECENT FOCUS AREAS</span><div class="focus-list"><div class="focus-item reveal"><div class="focus-title">Grid Connection for New Hospital Developments</div><div class="focus-desc">Managing grid connection programmes for new hospital builds and major acute facility expansions, including securing N-1 security of supply.</div></div><div class="focus-item reveal"><div class="focus-title">Power Resilience & Backup Strategy</div><div class="focus-desc">Designing comprehensive power resilience strategies — from UPS and on-site generation to grid reinforcement — for acute clinical environments.</div></div><div class="focus-item reveal"><div class="focus-title">Medical Research Campus Energy Masterplanning</div><div class="focus-desc">Developing long-term energy infrastructure masterplans for large medical research and pharmaceutical manufacturing campuses with growing power demands.</div></div><div class="focus-item reveal"><div class="focus-title">Net Zero & Sustainability Programmes</div><div class="focus-desc">Supporting NHS and private healthcare groups in meeting net zero commitments, including on-site generation, grid decarbonisation, and energy procurement.</div></div><div class="focus-item reveal"><div class="focus-title">Emergency Power Compliance</div><div class="focus-desc">Ensuring compliance with HTM 06-01 and equivalent international standards for essential electrical services in healthcare facilities.</div></div></div></div></section>
+<section id="capabilities" class="cap-section"><div class="sh"><h2 class="cap-headline reveal">Infrastructure That Protects Patient Safety</h2><div class="cap-grid"><div class="cap-item reveal d1"><div class="cap-item-title">Security of Supply Planning</div><div class="cap-item-desc">Structuring N-1 and N-2 secure power supply configurations for critical clinical areas, operating theatres, and intensive care environments.</div></div><div class="cap-item reveal d2"><div class="cap-item-title">On-Site Generation Strategy</div><div class="cap-item-desc">Designing combined heat and power, standby generation, and battery storage systems integrated with grid supply for optimal resilience and cost efficiency.</div></div><div class="cap-item reveal d3"><div class="cap-item-title">Capital Programme Support</div><div class="cap-item-desc">Providing independent technical and commercial advice on energy infrastructure capital programmes within healthcare PFI and NHS frameworks.</div></div><div class="cap-item reveal d4"><div class="cap-item-title">Regulatory & Compliance Advisory</div><div class="cap-item-desc">Navigating HTM, SHTM, and international equivalent standards for essential electrical services across diverse healthcare estate portfolios.</div></div></div></div></section>
+<section id="our-work" class="work-section"><div class="sh work-header reveal"><h2 class="work-header-title">Our Work</h2></div>
+<div class="work-row"><div class="work-panel" style="background-image:url('Brand_assets/Image inventory/Execution 1.jpg');"></div><div class="work-text"><span class="work-label">Case Study</span><h3 class="work-title">New 800-Bed Hospital, N-1 Grid Connection</h3><p class="work-body">Led grid connection strategy and HTM 06-01 compliance programme for a major new acute hospital, securing a dual-fed 33kV N-1 connection to protect patient safety.</p></div></div>
+<div class="work-row"><div class="work-text"><span class="work-label">Portfolio Advisory</span><h3 class="work-title">Net Zero Energy Strategy, NHS Trust</h3><p class="work-body">Developed a whole-estate net zero energy strategy for a large NHS trust covering 14 sites, identifying £8.2M in annual energy savings and a pathway to carbon neutrality by 2040.</p></div><div class="work-panel" style="background-image:url('Brand_assets/Image inventory/Execution 2.jpg');"></div></div>
+</section>
+<section class="pub-section"><div class="sh pub-grid"><div><span class="pub-eyebrow">FEATURED PUBLICATION</span><h3 class="pub-title">Securing Power Continuity in Healthcare Infrastructure</h3><p class="pub-desc">A practical guide for healthcare estates teams and capital programme directors navigating grid connections, resilience requirements, and net zero commitments across NHS and private healthcare settings.</p><a href="insights-reports.html" class="pub-link">Read the report →</a></div><div class="pub-visual"><span class="pub-visual-label">Heinnsof Insights — 2025</span></div></div></section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col-group"><span class="footer-col-title">Explore</span><a href="insights.html" class="footer-col-link">Our Insights</a><a href="careers.html" class="footer-col-link">Careers</a><a href="sustainability.html" class="footer-col-link">Sustainability</a>
+</div>
+      <div class="footer-col-group"><span class="footer-col-title">Company</span><a href="about-who-we-are.html" class="footer-col-link">About Us</a><a href="about-leadership.html" class="footer-col-link">Leadership Team</a><a href="about-mission-purpose.html" class="footer-col-link">Our Mission</a><a href="careers.html" class="footer-col-link">Careers</a><a href="contact.html" class="footer-col-link">Contact</a></div>
+      <div class="footer-col-group"><span class="footer-col-title" data-i18n="footer.siteInfo">Site Information</span><a href="cookie-consent.html" class="footer-col-link" data-i18n="footer.cookieConsent">Cookie Consent</a><a href="cookie-notice.html" class="footer-col-link" data-i18n="footer.cookieNotices">Cookie Notices</a><a href="scam-fraud-alert.html" class="footer-col-link" data-i18n="footer.scamAlert">Scam and Fraud Alert</a><a href="terms-conditions.html" class="footer-col-link" data-i18n="footer.terms">Terms and Conditions</a><a href="privacy-note.html" class="footer-col-link" data-i18n="footer.privacy">Privacy Note</a><a href="disclaimers.html" class="footer-col-link" data-i18n="footer.disclaimers">Disclaimers</a><a href="accessibility.html" class="footer-col-link" data-i18n="footer.accessibility">Accessibility</a><a href="sitemap.html" class="footer-col-link" data-i18n="footer.sitemap">Sitemap</a></div>
+      <div class="footer-col-group"><span class="footer-col-title">Social</span><a href="#" class="footer-col-link footer-col-link--icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a><a href="#" class="footer-col-link footer-col-link--icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.631 5.903-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Twitter (X)</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Heinnsof. All rights reserved.</p>
+    <div class="footer-tagline"><span>Accelerating Energy Execution</span></div>
+  </div>
+</footer>
+<script>
+  const navEl=document.getElementById('nav');let lastY=0;
+  window.addEventListener('scroll',()=>{const y=window.scrollY;navEl.classList.toggle('scrolled',y>10);navEl.classList.toggle('hidden',y>lastY&&y>80);lastY=y;},{passive:true});
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  (function(){const triggers=document.querySelectorAll('.has-drop');let ct=null;function open(t){clearTimeout(ct);triggers.forEach(x=>{if(x!==t){x.classList.remove('is-open');const d=x.querySelector('.mega-drop');if(d)d.classList.remove('is-open');}});t.classList.add('is-open');const d=t.querySelector('.mega-drop');if(d)d.classList.add('is-open');}function close(t){ct=setTimeout(()=>{t.classList.remove('is-open');const d=t.querySelector('.mega-drop');if(d)d.classList.remove('is-open');},120);}triggers.forEach(t=>{t.addEventListener('mouseenter',()=>open(t));t.addEventListener('mouseleave',()=>close(t));});document.addEventListener('keydown',e=>{if(e.key==='Escape')triggers.forEach(t=>{t.classList.remove('is-open');const d=t.querySelector('.mega-drop');if(d)d.classList.remove('is-open');});});})();
+  const hbtn=document.getElementById('hamburger'),mob=document.getElementById('nav-mobile');
+  hbtn.addEventListener('click',()=>{hbtn.classList.toggle('open');mob.classList.toggle('open');});
+  mob.querySelectorAll('.mob-link').forEach(a=>a.addEventListener('click',()=>{hbtn.classList.remove('open');mob.classList.remove('open');}));
+  (function(){const lb=document.getElementById('langBtn'),ld=document.getElementById('langDrop');if(!lb||!ld)return;lb.addEventListener('click',function(e){e.stopPropagation();const o=ld.classList.toggle('is-open');lb.classList.toggle('is-open',o);lb.setAttribute('aria-expanded',String(o));});document.addEventListener('click',function(){ld.classList.remove('is-open');lb.classList.remove('is-open');lb.setAttribute('aria-expanded','false');});})();
+</script>
+<script>
+const I18N={en:{'nav.whatWeDo':'What We Do','nav.howWeHelp':'How We Help Clients','nav.overview':'Overview','nav.gridConnection':'Grid Connection Acceleration','nav.altPower':'Alternative Power Coordination','nav.masterplanning':'Energy Masterplanning & Feasibility','nav.endToEnd':'End-to-End Project Execution','nav.regulatory':'Regulatory Navigation & Stakeholder Management','nav.howWeWork':'How We Work','nav.engagementModel':'Our Engagement Model','nav.techPartners':'Technology Partners','nav.executionApproach':'Our Approach to Execution','nav.industries':'Industries','nav.sectors':'Industries','nav.dataCenters':'Data Centers','nav.evCharging':'EV Charging Networks','nav.industrial':'Industrial & Manufacturing','nav.government':'Government & Sovereign Infrastructure','nav.chemicals':'Chemicals','nav.oilGas':'Oil & Gas','nav.healthcare':'Healthcare','nav.insights':'Insights','nav.knowledgeResearch':'Knowledge & Research','nav.reports':'Reports & Whitepapers','nav.perspectives':'Market Perspectives','nav.caseStudies':'Case Studies','nav.aboutUs':'About Us','nav.ourFirm':'Our Firm','nav.whoWeAre':'Who We Are','nav.ourLeadership':'Our Leadership','nav.missionPurpose':'Mission & Purpose','nav.governance':'Our Governance','nav.newsMedia':'News & Media','nav.mediaPress':'Media & Press','nav.pressReleases':'Press Releases','nav.inTheNews':'Heinnsof in the News','nav.events':'Events and Conferences','nav.mediaEnquiries':'Media Enquiries','nav.contact':'Contact','nav.getInTouch':'Get in Touch','nav.getInTouchLink':'Get in Touch','nav.feasibility':'Request a Feasibility Assessment','nav.partner':'Partner with Heinnsof','nav.careers':'Careers','footer.siteInfo':'Site Information','footer.cookieConsent':'Cookie Consent','footer.cookieNotices':'Cookie Notices','footer.scamAlert':'Scam and Fraud Alert','footer.terms':'Terms and Conditions','footer.privacy':'Privacy Note','footer.disclaimers':'Disclaimers','footer.accessibility':'Accessibility','footer.sitemap':'Sitemap'},fr:{'nav.whatWeDo':'Ce que nous faisons','nav.howWeHelp':'Comment nous aidons nos clients','nav.overview':"Vue d'ensemble",'nav.gridConnection':'Accélération du raccordement au réseau','nav.altPower':'Coordination des énergies alternatives','nav.masterplanning':'Planification énergétique & faisabilité','nav.endToEnd':'Exécution de projet de bout en bout','nav.regulatory':'Navigation réglementaire & gestion des parties prenantes','nav.howWeWork':'Notre approche','nav.engagementModel':"Notre modèle d'engagement",'nav.techPartners':'Partenaires technologiques','nav.executionApproach':"Notre approche d'exécution",'nav.industries':'Industries','nav.sectors':'Industries','nav.dataCenters':'Centres de données','nav.evCharging':'Réseaux de recharge VE','nav.industrial':'Industrie & Fabrication','nav.government':'Gouvernement & Infrastructures souveraines','nav.chemicals':'Chimie','nav.oilGas':'Pétrole & Gaz','nav.healthcare':'Santé','nav.insights':'Perspectives','nav.knowledgeResearch':'Connaissances & Recherche','nav.reports':'Rapports & Livres blancs','nav.perspectives':'Perspectives de marché','nav.caseStudies':'Études de cas','nav.aboutUs':'À propos','nav.ourFirm':'Notre cabinet','nav.whoWeAre':'Qui sommes-nous','nav.ourLeadership':'Notre direction','nav.missionPurpose':'Mission & Objectif','nav.governance':'Notre gouvernance','nav.newsMedia':'Actualités & Médias','nav.mediaPress':'Médias & Presse','nav.pressReleases':'Communiqués de presse','nav.inTheNews':'Heinnsof dans les médias','nav.events':'Événements et conférences','nav.mediaEnquiries':'Demandes médias','nav.contact':'Contact','nav.getInTouch':'Nous contacter','nav.getInTouchLink':'Nous contacter','nav.feasibility':'Demander une évaluation de faisabilité','nav.partner':'Partenaire avec Heinnsof','nav.careers':'Carrières','footer.siteInfo':'Informations du site','footer.cookieConsent':'Consentement aux cookies','footer.cookieNotices':'Avis sur les cookies','footer.scamAlert':'Alerte escroqueries et fraudes','footer.terms':'Conditions générales','footer.privacy':'Note de confidentialité','footer.disclaimers':'Avertissements','footer.accessibility':'Accessibilité','footer.sitemap':'Plan du site'},es:{'nav.whatWeDo':'Lo que hacemos','nav.howWeHelp':'Cómo ayudamos a los clientes','nav.overview':'Descripción general','nav.gridConnection':'Aceleración de conexión a la red','nav.altPower':'Coordinación de energía alternativa','nav.masterplanning':'Planificación energética & Viabilidad','nav.endToEnd':'Ejecución de proyecto integral','nav.regulatory':'Navegación regulatoria & Gestión de partes interesadas','nav.howWeWork':'Cómo trabajamos','nav.engagementModel':'Nuestro modelo de participación','nav.techPartners':'Socios tecnológicos','nav.executionApproach':'Nuestro enfoque de ejecución','nav.industries':'Industrias','nav.sectors':'Industrias','nav.dataCenters':'Centros de datos','nav.evCharging':'Redes de carga VE','nav.industrial':'Industrial y Manufactura','nav.government':'Gobierno e Infraestructura soberana','nav.chemicals':'Química','nav.oilGas':'Petróleo y Gas','nav.healthcare':'Salud','nav.insights':'Perspectivas','nav.knowledgeResearch':'Conocimiento e Investigación','nav.reports':'Informes y Documentos técnicos','nav.perspectives':'Perspectivas de mercado','nav.caseStudies':'Casos de estudio','nav.aboutUs':'Sobre nosotros','nav.ourFirm':'Nuestra empresa','nav.whoWeAre':'Quiénes somos','nav.ourLeadership':'Nuestro liderazgo','nav.missionPurpose':'Misión y Propósito','nav.governance':'Nuestra gobernanza','nav.newsMedia':'Noticias y Medios','nav.mediaPress':'Medios y Prensa','nav.pressReleases':'Comunicados de prensa','nav.inTheNews':'Heinnsof en los medios','nav.events':'Eventos y conferencias','nav.mediaEnquiries':'Consultas de medios','nav.contact':'Contacto','nav.getInTouch':'Ponerse en contacto','nav.getInTouchLink':'Ponerse en contacto','nav.feasibility':'Solicitar una evaluación de viabilidad','nav.partner':'Asociarse con Heinnsof','nav.careers':'Carreras','footer.siteInfo':'Información del sitio','footer.cookieConsent':'Consentimiento de cookies','footer.cookieNotices':'Avisos de cookies','footer.scamAlert':'Alerta de fraudes y estafas','footer.terms':'Términos y condiciones','footer.privacy':'Nota de privacidad','footer.disclaimers':'Avisos legales','footer.accessibility':'Accesibilidad','footer.sitemap':'Mapa del sitio'}};
+function setLanguage(lang){const dict=I18N[lang]||I18N.en;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(dict[key]!==undefined)el.textContent=dict[key];});document.documentElement.setAttribute('lang',lang);const btn=document.querySelector('#langBtn');if(btn)btn.childNodes.forEach(n=>{if(n.nodeType===3)n.textContent=lang.toUpperCase();});localStorage.setItem('heinnsof-lang',lang);}
+(function(){const saved=localStorage.getItem('heinnsof-lang')||'en';if(saved!=='en')setLanguage(saved);})();
+</script>
+<script>
+const SI=[{title:'What We Do — Overview',url:'what-we-do-overview.html',cat:'Services',kw:'services energy advisory'},{title:'Grid Connection Acceleration',url:'service-grid-connection.html',cat:'Services',kw:'grid connection acceleration'},{title:'Alternative Power Coordination',url:'service-alternative-power.html',cat:'Services',kw:'alternative power energy'},{title:'Energy Masterplanning',url:'service-energy-masterplanning.html',cat:'Services',kw:'masterplanning feasibility'},{title:'End-to-End Execution',url:'service-end-to-end-execution.html',cat:'Services',kw:'execution project delivery'},{title:'Regulatory Navigation',url:'service-regulatory-navigation.html',cat:'Services',kw:'regulatory stakeholders policy'},{title:'Data Centers',url:'sector-data-centres.html',cat:'Industries',kw:'data centres AI'},{title:'EV Charging Networks',url:'sector-ev-charging.html',cat:'Industries',kw:'EV charging electric'},{title:'Industrial & Manufacturing',url:'sector-industrial.html',cat:'Industries',kw:'industrial manufacturing'},{title:'Government & Sovereign',url:'sector-government.html',cat:'Industries',kw:'government sovereign'},{title:'Chemicals',url:'sector-chemicals.html',cat:'Industries',kw:'chemicals processing'},{title:'Reports & Whitepapers',url:'insights-reports.html',cat:'Insights',kw:'reports whitepapers'},{title:'Market Perspectives',url:'insights-perspectives.html',cat:'Insights',kw:'perspectives market'},{title:'Case Studies',url:'insights-case-studies.html',cat:'Insights',kw:'case studies projects'},{title:'Who We Are',url:'about-who-we-are.html',cat:'About Us',kw:'about who firm'},{title:'Our Leadership',url:'about-leadership.html',cat:'About Us',kw:'leadership team'},{title:'Mission & Purpose',url:'about-mission-purpose.html',cat:'About Us',kw:'mission purpose values'},{title:'Our Governance',url:'about-governance.html',cat:'About Us',kw:'governance structure'},{title:'How We Work Overview',url:'how-we-work-overview.html',cat:'How We Work',kw:'how we work process'},{title:'Engagement Model',url:'how-we-work-engagement.html',cat:'How We Work',kw:'engagement model'},{title:'Technology Partners',url:'how-we-work-technology-partners.html',cat:'How We Work',kw:'technology partners'},{title:'Approach to Execution',url:'how-we-work-execution.html',cat:'How We Work',kw:'execution approach'},{title:'Contact',url:'contact.html',cat:'Contact',kw:'contact get in touch'},{title:'Careers',url:'careers.html',cat:'Company',kw:'careers jobs'},{title:'Sitemap',url:'sitemap.html',cat:'Site',kw:'sitemap pages'}];
+(function(){var sb=document.querySelector('.nav-search'),ov=document.getElementById('search-overlay'),inp=document.getElementById('search-input'),res=document.getElementById('search-results'),cb=document.getElementById('search-close'),bd=ov?ov.querySelector('.search-backdrop'):null;if(!sb||!ov)return;function op(){ov.classList.add('is-open');document.body.style.overflow='hidden';setTimeout(function(){if(inp)inp.focus();},60);}function cl(){ov.classList.remove('is-open');document.body.style.overflow='';if(inp)inp.value='';if(res)res.innerHTML='';}sb.addEventListener('click',op);if(cb)cb.addEventListener('click',cl);if(bd)bd.addEventListener('click',cl);document.addEventListener('keydown',function(e){if(e.key==='Escape')cl();});if(inp){inp.addEventListener('input',function(){var q=this.value.trim().toLowerCase();if(!res)return;if(q.length<2){res.innerHTML='';return;}var m=SI.filter(function(i){return i.title.toLowerCase().includes(q)||i.kw.toLowerCase().includes(q)||i.cat.toLowerCase().includes(q);}).slice(0,8);if(!m.length){res.innerHTML='<p class="sr-empty">No results found.</p>';return;}res.innerHTML=m.map(function(i){return'<a href="'+i.url+'" class="sr-item"><span class="sr-category">'+i.cat+'</span><span class="sr-title">'+i.title+'</span></a>';}).join('');});}})();
+</script>
+</body>
+</html>

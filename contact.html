@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Heinnsof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --principal: #8C0032; --dark-blue: #0D1826; --wine-rose: #A63D52; --gray-blue: #627896; --black: #1A1A1A; --body-text: #3D3D3D; --muted: #767676; --rule: #E5E5E5; --light-bg: #F5F5F5; --footer-bg: #07101B; --font: 'Inter', sans-serif; --ease: 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); font-weight: 300; color: var(--body-text); background: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { font-family: var(--font); cursor: pointer; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; }
+    .eyebrow { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .eyebrow-accent { color: var(--principal); }
+
+    /* NAV */
+    #nav { position: fixed; inset: 0 0 auto; z-index: 1000; background: #fff; border-bottom: 1px solid var(--rule); transition: transform var(--ease), box-shadow var(--ease); overflow: visible; }
+    #nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+    #nav.hidden { transform: translateY(-100%); }
+    .nav-inner { max-width: 1240px; margin: 0 auto; padding: 0 72px; height:72px; display: flex; align-items: center; gap: 32px; overflow:hidden;}
+    .nav-logo img { height:48px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; flex: 1; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: var(--black); position: relative; padding-bottom: 2px; transition: color var(--ease); }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--principal); transition: width var(--ease); }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--principal); }
+    .nav-links a:hover::after, .nav-links a[aria-current="page"]::after { width: 100%; }
+    .nav-search { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: none; border: none; color: var(--black); cursor: pointer; transition: color var(--ease); margin-left: 8px; }
+    .nav-search:hover { color: var(--principal); }
+    .nav-search svg { width: 18px; height: 18px; }
+    /* MEGA-MENU */
+    .has-drop { position: static; }
+    .has-drop > a { display: inline-flex !important; align-items: center; gap: 4px; }
+    .has-drop > a::after { display: none !important; }
+    .nav-chevron { width: 10px; height: 10px; flex-shrink: 0; transition: transform 0.2s ease; color: var(--muted); }
+    .has-drop.is-open > a .nav-chevron { transform: rotate(180deg); }
+    .has-drop.is-open > a { color: var(--principal); }
+    .mega-drop { position: fixed; top:72px; left: 0; width: 100%; background: #fff; border-top:2px solid var(--principal); border-bottom: 1px solid var(--rule); box-shadow: 0 20px 60px rgba(0,0,0,0.10); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; z-index: 997; pointer-events: none; }
+    .mega-drop.is-open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: all; }
+    .mega-inner { max-width: 1240px; margin: 0 auto; padding: 40px 72px; display: grid; gap: 48px; align-items: start; }
+    .md-eyebrow { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 18px; }
+    .md-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .md-links li a { font-size: 13.5px !important; font-weight: 400 !important; color: var(--body-text) !important; display: flex !important; align-items: center; padding: 4px 0; transition: color 0.18s, padding-left 0.18s !important; letter-spacing: 0 !important; position: relative; }
+    .md-links li a::before { content: '→'; font-size: 11px; color: var(--principal); opacity: 0; width: 0; overflow: hidden; transition: opacity 0.18s, width 0.18s, margin-right 0.18s; margin-right: 0; display: inline-block; }
+    .md-links li a::after { display: none !important; }
+    .md-links li a:hover { color: var(--principal) !important; padding-left: 4px; }
+    .md-links li a:hover::before { opacity: 1; width: 14px; margin-right: 6px; }
+    .md-feature { background: var(--dark-blue); padding: 28px 26px 24px; display: flex; flex-direction: column; min-height: 170px; }
+    .md-feat-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--principal); margin-bottom: 14px; }
+    .md-feat-title { font-size: 14px; font-weight: 600; color: #fff; line-height: 1.48; flex: 1; margin-bottom: 18px; }
+    .md-feat-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45); border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s, gap 0.2s; }
+    .md-feat-link:hover { color: #fff; border-color: rgba(255,255,255,0.45); gap: 10px; }
+    @media (max-width: 768px) { .mega-drop { display: none !important; } }
+    .nav-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .nav-lang { position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 5px; font-size:12px; font-weight: 500; color: var(--black, #0D1826); background: none; border: none; cursor: pointer; padding: 6px 8px; border-radius: 4px; transition: background 0.18s, color 0.18s; font-family: inherit; letter-spacing: 0.04em; }
+    .lang-btn:hover, .lang-btn.is-open { background: rgba(0,0,0,0.04); color: #8C0032; }
+    .lang-drop { position: absolute; top: calc(100% + 8px); right: 0; background: #fff; border: 1px solid #e5e7eb; border-top: 2px solid #8C0032; box-shadow: 0 12px 40px rgba(0,0,0,0.10); min-width: 148px; list-style: none; padding: 0; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.2s, transform 0.2s, visibility 0.2s; z-index: 998; }
+    .lang-drop.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-drop li a { display: block; font-size: 13px; font-weight: 400; color: #374151; padding: 9px 16px; transition: background 0.15s, color 0.15s; }
+    .lang-drop li a:hover { background: #f5f5f7; color: #8C0032; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: transform var(--ease), opacity var(--ease); }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-mobile { display: none; flex-direction: column; background: #fff; border-top: 1px solid var(--rule); padding: 8px 24px 24px; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 15px; color: var(--black); padding: 14px 0; border-bottom: 1px solid var(--rule); transition: color var(--ease); }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile a:hover { color: var(--principal); }
+
+    /* FOOTER */
+    footer { background: #07101B; border-top: 1px solid rgba(255,255,255,0.07); padding: 72px 0 0; }
+    .footer-inner { max-width: 1240px; margin: 0 auto; padding: 0 72px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-bottom: 56px; }
+    .footer-col-group { display: flex; flex-direction: column; gap: 12px; }
+    .footer-col-title { display: block; font-size: 12px; font-weight: 600; color: #fff; margin-bottom: 4px; letter-spacing: 0.02em; }
+    .footer-col-link { display: block; font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.42); transition: color 0.2s; line-height: 1.5; }
+    .footer-col-link:hover { color: rgba(255,255,255,0.9); }
+    .footer-col-link--icon { display: flex; align-items: center; gap: 8px; }
+    .footer-col-link--icon svg { width: 14px; height: 14px; flex-shrink: 0; fill: currentColor; }
+    .footer-logo-col { display: flex; justify-content: flex-start; align-items: flex-start; margin-top: 16px; }
+    .footer-logo-col img { height: 22px; opacity: 0.65; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); max-width: 1240px; margin: 0 auto; padding: 20px 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .footer-copy { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.22); }
+    .footer-tagline { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.45); }
+    .footer-iso-logo { height: 24px; width: auto; opacity: 0.65; flex-shrink: 0; }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--dark-blue); padding:148px 0 80px; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 28px 28px; }
+    .ph-shell { max-width: 1240px; margin: 0 auto; padding: 0 72px; position: relative; z-index: 1; }
+    .ph-title { font-size: clamp(40px, 5vw, 72px); font-weight: 800; color: #fff; line-height: 1.0; letter-spacing: -2px; margin-bottom: 20px; }
+    .ph-sub { font-size: 16px; font-weight: 300; color: var(--gray-blue); line-height: 1.8; max-width: 560px; }
+
+    /* CONTACT */
+    #contact { background: #fff; padding: 100px 0; border-top: 1px solid var(--rule); }
+    .contact-shell { max-width: 1240px; margin: 0 auto; padding: 0 72px; display: grid; grid-template-columns: 2fr 3fr; gap: 96px; align-items: start; }
+    .contact-heading { font-size: clamp(24px, 2.8vw, 36px); font-weight: 700; color: var(--black); line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 40px; }
+    .c-detail { margin-bottom: 28px; }
+    .c-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .c-value { font-size: 14px; font-weight: 400; color: var(--body-text); line-height: 1.65; }
+    .c-value a { color: var(--principal); transition: opacity var(--ease); }
+    .c-value a:hover { opacity: 0.75; }
+    .contact-form form { display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .f-group { display: flex; flex-direction: column; gap: 8px; }
+    .f-group label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .f-group input, .f-group textarea { background: var(--light-bg); border: 1px solid var(--rule); padding: 14px 16px; font-family: var(--font); font-size: 14px; font-weight: 300; color: var(--black); outline: none; border-radius: 0; -webkit-appearance: none; transition: border-color var(--ease), background var(--ease); }
+    .f-group input::placeholder, .f-group textarea::placeholder { color: #aaa; }
+    .f-group input:focus, .f-group textarea:focus { border-color: var(--principal); background: #fff; }
+    .f-group textarea { min-height: 140px; resize: vertical; }
+    .form-submit { background: var(--principal); color: #fff; font-family: var(--font); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; padding: 15px 40px; border: 1px solid var(--principal); width: 100%; transition: background var(--ease), border-color var(--ease); cursor: pointer; }
+    .form-submit:hover { background: var(--wine-rose); border-color: var(--wine-rose); }
+
+    @media (max-width: 1080px) { .nav-inner, .ph-shell, .contact-shell { padding-left: 40px; padding-right: 40px; } .footer-inner, .footer-bottom { padding-left: 40px; padding-right: 40px; } .footer-grid { grid-template-columns: repeat(3, 1fr); } .contact-shell { gap: 56px; } }
+    @media (max-width: 768px) { .nav-inner { padding: 0 24px; overflow:hidden;} .nav-links, .nav-search { display: none; } .nav-hamburger { display: flex; } .ph-shell, .contact-shell { padding: 0 24px; } .contact-shell { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } .footer-inner { padding: 0 24px; } .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } .footer-bottom { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 8px; } }
+  
+    /* =================================================================
+       SEARCH OVERLAY
+    ================================================================= */
+    #search-overlay { position:fixed; inset:0; z-index:1100; opacity:0; visibility:hidden; transition:opacity 0.2s ease,visibility 0.2s ease; }
+    #search-overlay.is-open { opacity:1; visibility:visible; }
+    .search-backdrop { position:absolute; inset:0; background:rgba(13,24,38,0.75); backdrop-filter:blur(5px); }
+    .search-panel { position:absolute; top:72px; left:50%; transform:translateX(-50%); width:min(640px,92vw); background:#fff; border:1px solid var(--rule); border-top:3px solid var(--principal); box-shadow:0 32px 80px rgba(0,0,0,0.22); }
+    .search-input-row { display:flex; align-items:center; gap:12px; padding:16px 20px; border-bottom:1px solid var(--rule); }
+    .search-input-row svg { width:18px; height:18px; color:var(--muted); flex-shrink:0; }
+    #search-input { flex:1; border:none; outline:none; font-family:var(--font); font-size:16px; color:var(--body-text); background:transparent; }
+    #search-input::placeholder { color:var(--muted); }
+    #search-close { background:none; border:none; font-size:18px; color:var(--muted); cursor:pointer; padding:4px; transition:color 0.25s; }
+    #search-close:hover { color:var(--principal); }
+    .search-results { max-height:380px; overflow-y:auto; }
+    .sr-item { display:flex; align-items:center; padding:14px 20px; border-bottom:1px solid var(--rule); transition:background 0.2s; gap:12px; }
+    .sr-item:last-child { border-bottom:none; }
+    .sr-item:hover { background:var(--light-bg); }
+    .sr-category { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--principal); min-width:90px; }
+    .sr-title { font-size:14px; font-weight:500; color:var(--body-text); }
+    .sr-empty { padding:24px 20px; font-size:14px; color:var(--muted); }
+
+  
+    /* Dynamic logo switching */
+    .logo-white { display:none; }
+    body.dark-hero #nav { background:transparent; border-bottom-color:transparent; box-shadow:none; transition:background 0.3s,border-color 0.3s,box-shadow 0.3s; }
+    body.dark-hero #nav .nav-links a { color:rgba(255,255,255,0.85); }
+    body.dark-hero #nav .nav-links a:hover { color:#fff; }
+    body.dark-hero #nav .nav-hamburger span { background:#fff; }
+    body.dark-hero #nav .nav-search { color:rgba(255,255,255,0.85); }
+    body.dark-hero #nav .lang-btn { color:rgba(255,255,255,0.85); }
+    body.dark-hero #nav .logo-color { display:none; }
+    body.dark-hero #nav .logo-white { display:block; }
+    body.dark-hero #nav .nav-chevron { color:rgba(255,255,255,0.6); }
+    body.dark-hero #nav.scrolled .nav-chevron { color:var(--muted); }
+    body.dark-hero #nav.scrolled { background:#fff; border-bottom:1px solid var(--rule); box-shadow:0 2px 16px rgba(0,0,0,0.06); }
+    body.dark-hero #nav.scrolled .nav-links a { color:var(--black); }
+    body.dark-hero #nav.scrolled .nav-hamburger span { background:var(--black); }
+    body.dark-hero #nav.scrolled .nav-search { color:var(--black); }
+    body.dark-hero #nav.scrolled .lang-btn { color:var(--black); }
+    body.dark-hero #nav.scrolled .logo-color { display:block; }
+    body.dark-hero #nav.scrolled .logo-white { display:none; }
+
+  
+    /* ── MOBILE OVERRIDES ── */
+    @media (max-width: 768px) {
+      /* Nav: shrink tall logo on mobile */
+      .nav-inner { height: 64px !important; padding: 0 20px !important; overflow:hidden;}
+      .nav-logo img { height: 40px !important; }
+      .nav-links, .nav-actions { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      /* Hero padding compensation for smaller nav */
+      .sector-hero, .svc-hero { padding: 110px 24px 60px !important; }
+      .p-hero { padding: 110px 24px 60px !important; }
+      .page-header { padding: 110px 24px 60px !important; }
+      /* Shell/container */
+      .sh { padding: 0 20px !important; }
+      .ph-shell, .contact-shell { padding: 0 20px !important; }
+      /* Grids → single column */
+      .split-grid, .work-row, .cap-grid, .help-grid,
+      .pub-grid, .focus-item, .about-img-grid,
+      .contact-shell, .form-row { grid-template-columns: 1fr !important; }
+      /* Work panels get a fixed height on mobile */
+      .work-panel { min-height: 240px !important; }
+      .about-img-cell { height: 260px !important; }
+      /* Text size clamp adjustments */
+      .s-headline, .svc-headline, .p-headline { font-size: clamp(28px, 8vw, 44px) !important; letter-spacing: -0.5px !important; }
+      .s-desc, .svc-desc, .p-desc { font-size: 15px !important; }
+      /* Footer */
+      .footer-inner, .footer-bottom { padding: 0 20px !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 20px !important; }
+      /* CTA band */
+      .cta-band { padding: 60px 20px !important; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      /* Anchors strip on mobile */
+      .s-anchors, .svc-anchors { gap: 0; flex-wrap: wrap; }
+      .s-anchor, .svc-anchor { font-size: 11px !important; padding: 6px 16px 6px 0 !important; }
+      /* Experts/leaders grids */
+      .experts-grid, .leaders-grid, .mission-grid { grid-template-columns: 1fr 1fr !important; }
+      /* Inline CTA */
+      .inline-cta-inner { flex-direction: column; align-items: flex-start; }
+      .inline-cta-actions { flex-direction: column; width: 100%; }
+      .inline-cta-actions .btn { width: 100%; justify-content: center; }
+      /* Diff cards */
+      .diff-grid { grid-template-columns: 1fr !important; }
+      /* Search panel */
+      .search-panel { top: 64px; width: 94vw; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+      .experts-grid, .leaders-grid, .mission-grid { grid-template-columns: 1fr !important; }
+      .form-row { grid-template-columns: 1fr !important; }
+    }
+
+  </style>
+</head>
+<body class="dark-hero">
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="Brand_assets/logo files/Logo Horizontal color.png" alt="Heinnsof" class="logo-color">
+      <img src="Brand_assets/logo files/Logo Horizontal white.png" alt="Heinnsof" class="logo-white">
+    </a>
+
+    <ul class="nav-links">
+
+      <!-- What We Do -->
+      <li class="has-drop" id="drop-trigger-whatwedo">
+        <a href="what-we-do-overview.html" data-i18n="nav.whatWeDo">What We Do</a>
+        <div class="mega-drop" id="mega-whatwedo">
+          <div class="mega-inner" style="grid-template-columns:1fr 1fr;">
+            <div class="md-col">
+              <span class="md-eyebrow" data-i18n="nav.howWeHelp">How We Help Clients</span>
+              <ul class="md-links">
+                <li><a href="what-we-do-overview.html" data-i18n="nav.overview">Overview</a></li>
+                <li><a href="service-grid-connection.html" data-i18n="nav.gridConnection">Grid Connection Acceleration</a></li>
+                <li><a href="service-alternative-power.html" data-i18n="nav.altPower">Alternative Power Coordination</a></li>
+                <li><a href="service-energy-masterplanning.html" data-i18n="nav.masterplanning">Energy Masterplanning &amp; Feasibility</a></li>
+                <li><a href="service-end-to-end-execution.html" data-i18n="nav.endToEnd">End-to-End Project Execution</a></li>
+                <li><a href="service-regulatory-navigation.html" data-i18n="nav.regulatory">Regulatory Navigation &amp; Stakeholder Management</a></li>
+              </ul>
+            </div>
+            <div class="md-col">
+              <span class="md-eyebrow" data-i18n="nav.howWeWork">How We Work</span>
+              <ul class="md-links">
+                <li><a href="how-we-work-overview.html" data-i18n="nav.overview">Overview</a></li>
+                <li><a href="how-we-work-engagement.html" data-i18n="nav.engagementModel">Our Engagement Model</a></li>
+                <li><a href="how-we-work-technology-partners.html" data-i18n="nav.techPartners">Technology Partners</a></li>
+                <li><a href="how-we-work-execution.html" data-i18n="nav.executionApproach">Our Approach to Execution</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Industries -->
+      <li class="has-drop" id="drop-trigger-industries">
+        <a href="industries.html" data-i18n="nav.industries">Industries</a>
+        <div class="mega-drop" id="mega-industries">
+          <div class="mega-inner" style="grid-template-columns:1fr;">
+            <div class="md-col">
+              <span class="md-eyebrow" data-i18n="nav.sectors">Industries</span>
+              <ul class="md-links" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 48px;">
+                <li><a href="sector-data-centres.html" data-i18n="nav.dataCenters">Data Centers</a></li>
+                <li><a href="sector-ev-charging.html" data-i18n="nav.evCharging">EV Charging Networks</a></li>
+                <li><a href="sector-industrial.html" data-i18n="nav.industrial">Industrial &amp; Manufacturing</a></li>
+                <li><a href="sector-government.html" data-i18n="nav.government">Government &amp; Sovereign Infrastructure</a></li>
+                <li><a href="sector-chemicals.html" data-i18n="nav.chemicals">Chemicals</a></li></ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Insights -->
+      <li class="has-drop" id="drop-trigger-insights">
+        <a href="insights.html" data-i18n="nav.insights">Insights</a>
+        <div class="mega-drop" id="mega-insights">
+          <div class="mega-inner" style="grid-template-columns:1fr;">
+            <div class="md-col">
+              <span class="md-eyebrow" data-i18n="nav.knowledgeResearch">Knowledge &amp; Research</span>
+              <ul class="md-links">
+                <li><a href="insights-reports.html" data-i18n="nav.reports">Reports &amp; Whitepapers</a></li>
+                <li><a href="insights-perspectives.html" data-i18n="nav.perspectives">Market Perspectives</a></li>
+                <li><a href="insights-case-studies.html" data-i18n="nav.caseStudies">Case Studies</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- About Us -->
+      <li class="has-drop" id="drop-trigger-about">
+        <a href="about-who-we-are.html" data-i18n="nav.aboutUs">About Us</a>
+        <div class="mega-drop" id="mega-about">
+          <div class="mega-inner" style="grid-template-columns:1fr;">
+            <div class="md-col">
+              <span class="md-eyebrow" data-i18n="nav.ourFirm">Our Firm</span>
+              <ul class="md-links">
+                <li><a href="about-who-we-are.html" data-i18n="nav.whoWeAre">Who We Are</a></li>
+                <li><a href="about-leadership.html" data-i18n="nav.ourLeadership">Our Leadership</a></li>
+                <li><a href="about-mission-purpose.html" data-i18n="nav.missionPurpose">Mission &amp; Purpose</a></li>
+                <li><a href="about-governance.html" data-i18n="nav.governance">Our Governance</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- Contact -->
+      <li class="has-drop" id="drop-trigger-contact">
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <div class="mega-drop" id="mega-contact">
+          <div class="mega-inner" style="grid-template-columns:1fr;">
+            <div class="md-col">
+              <span class="md-eyebrow" data-i18n="nav.getInTouch">Get in Touch</span>
+              <ul class="md-links" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 48px;">
+                <li><a href="contact.html" data-i18n="nav.getInTouchLink">Get in Touch</a></li>
+                <li><a href="contact.html#feasibility" data-i18n="nav.feasibility">Request a Feasibility Assessment</a></li>
+                <li><a href="contact.html#partner" data-i18n="nav.partner">Partner with Heinnsof</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <!-- Right actions: Search + Language selector -->
+    <div class="nav-actions">
+      <button class="nav-search" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+        </svg>
+      </button></div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="what-we-do-overview.html" class="mob-link" data-i18n="nav.whatWeDo">What We Do</a>
+    <a href="industries.html"          class="mob-link" data-i18n="nav.industries">Industries</a>
+    <a href="insights.html"            class="mob-link" data-i18n="nav.insights">Insights</a>
+    <a href="about-who-we-are.html"    class="mob-link" data-i18n="nav.aboutUs">About Us</a>
+    <a href="contact.html"             class="mob-link" data-i18n="nav.contact">Contact</a>
+    <a href="contact.html"             class="mob-link" style="color:var(--principal);" data-i18n="nav.getInTouchLink">Get in Touch →</a>
+  </div>
+</nav>
+
+<!-- ================================================================
+     SEARCH OVERLAY
+================================================================ -->
+<div id="search-overlay" role="dialog" aria-label="Search" aria-modal="true">
+  <div class="search-backdrop"></div>
+  <div class="search-panel">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      <input type="search" id="search-input" placeholder="Search pages, services, sectors…" autocomplete="off">
+      <button id="search-close" aria-label="Close search">✕</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="ph-shell">
+    <span class="eyebrow eyebrow-accent reveal">Get in Touch</span>
+    <h1 class="ph-title reveal d1">Contact<br>Us</h1>
+    <p class="ph-sub reveal d2">Whether you have a mandate to discuss, a project to structure, or simply want to learn more — we'd like to hear from you.</p>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="contact-shell">
+    <div class="contact-info reveal">
+      <span class="eyebrow eyebrow-accent">Contact</span>
+      <h2 class="contact-heading">Let's build something that matters.</h2>
+      <div class="c-detail">
+        <div class="c-label">Email</div>
+        <div class="c-value"><a href="mailto:contact@heinnsof.com">contact@heinnsof.com</a></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-label">Phone</div>
+        <div class="c-value"><a href="tel:+33000000000">+33 (0) 00 00 00 00</a></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-label">Office</div>
+        <div class="c-value">Paris, France<br>Regional presence: Nairobi · Dubai · Singapore</div>
+      </div>
+      <div class="c-detail">
+        <div class="c-label">Operating Regions</div>
+        <div class="c-value">Sub-Saharan Africa · MENA · Southeast Asia</div>
+      </div>
+    </div>
+    <div class="contact-form reveal d1">
+      <form onsubmit="return false;">
+        <div class="form-row">
+          <div class="f-group">
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Your name">
+          </div>
+          <div class="f-group">
+            <label for="forg">Organisation</label>
+            <input type="text" id="forg" name="forg" placeholder="Your organisation">
+          </div>
+        </div>
+        <div class="f-group">
+          <label for="femail">Email Address</label>
+          <input type="email" id="femail" name="femail" placeholder="your@email.com">
+        </div>
+        <div class="f-group">
+          <label for="fmsg">Message</label>
+          <textarea id="fmsg" name="fmsg" placeholder="Tell us about your project or mandate…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col-group">
+        <span class="footer-col-title">Explore</span>
+        <a href="insights.html" class="footer-col-link">Our Insights</a>
+        <a href="careers.html" class="footer-col-link">Careers</a>
+        <a href="sustainability.html" class="footer-col-link">Sustainability</a>
+<a href="#" class="footer-col-link">Blog</a>
+      </div>
+      <div class="footer-col-group">
+        <span class="footer-col-title">Company</span>
+        <a href="about.html" class="footer-col-link">About Us</a>
+        <a href="about.html#team" class="footer-col-link">Leadership Team</a>
+        <a href="about.html#mission" class="footer-col-link">Our Mission</a>
+        <a href="careers.html" class="footer-col-link">Careers</a>
+        <a href="contact.html" class="footer-col-link">Contact</a>
+        <a href="#" class="footer-col-link">Partners</a>
+      </div>
+      <div class="footer-col-group">
+        <span class="footer-col-title" data-i18n="footer.siteInfo">Site Information</span>
+        <a href="cookie-consent.html" class="footer-col-link" data-i18n="footer.cookieConsent">Cookie Consent</a>
+        <a href="cookie-notice.html" class="footer-col-link" data-i18n="footer.cookieNotices">Cookie Notices</a>
+        <a href="scam-fraud-alert.html" class="footer-col-link" data-i18n="footer.scamAlert">Scam and Fraud Alert</a>
+        <a href="terms-conditions.html" class="footer-col-link" data-i18n="footer.terms">Terms and Conditions</a>
+        <a href="privacy-note.html" class="footer-col-link" data-i18n="footer.privacy">Privacy Note</a>
+        <a href="disclaimers.html" class="footer-col-link" data-i18n="footer.disclaimers">Disclaimers</a>
+        <a href="accessibility.html" class="footer-col-link" data-i18n="footer.accessibility">Accessibility</a>
+        <a href="sitemap.html" class="footer-col-link" data-i18n="footer.sitemap">Sitemap</a>
+      </div>
+      <div class="footer-col-group">
+        <span class="footer-col-title">Social</span>
+        <a href="#" class="footer-col-link footer-col-link--icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="#" class="footer-col-link footer-col-link--icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.631 5.903-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Twitter (X)
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Heinnsof. All rights reserved.</p>
+    <div class="footer-tagline"><span>Accelerating Energy Execution</span></div>
+  </div>
+</footer>
+
+<script>
+  const navEl = document.getElementById('nav'); let lastY = 0;
+  window.addEventListener('scroll', () => { const y = window.scrollY; navEl.classList.toggle('scrolled', y > 10); navEl.classList.toggle('hidden', y > lastY && y > 80); lastY = y; }, { passive: true });
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const hbtn = document.getElementById('hamburger'), mob = document.getElementById('nav-mobile');
+  hbtn.addEventListener('click', () => { hbtn.classList.toggle('open'); mob.classList.toggle('open'); });
+  mob.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => { hbtn.classList.remove('open'); mob.classList.remove('open'); }));
+  /* Mega-drop */
+  (function() {
+    const triggers = document.querySelectorAll('.has-drop');
+    let current = null;
+    triggers.forEach(function(li) {
+      const drop = li.querySelector('.mega-drop');
+      if (!drop) return;
+      li.addEventListener('mouseenter', function() {
+        if (current && current !== li) { current.classList.remove('is-open'); current.querySelector('.mega-drop') && current.querySelector('.mega-drop').classList.remove('is-open'); }
+        li.classList.add('is-open'); drop.classList.add('is-open'); current = li;
+      });
+      li.addEventListener('mouseleave', function() { li.classList.remove('is-open'); drop.classList.remove('is-open'); if (current === li) current = null; });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.has-drop')) { triggers.forEach(function(li) { li.classList.remove('is-open'); const d = li.querySelector('.mega-drop'); if (d) d.classList.remove('is-open'); }); current = null; }
+    });
+  })();
+  /* Language selector */
+  (function () {
+    const langBtn  = document.getElementById('langBtn');
+    const langDrop = document.getElementById('langDrop');
+    if (!langBtn || !langDrop) return;
+    langBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const open = langDrop.classList.toggle('is-open');
+      langBtn.classList.toggle('is-open', open);
+      langBtn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', function() {
+      langDrop.classList.remove('is-open');
+      langBtn.classList.remove('is-open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  })();
+</script>
+<!-- ================================================================
+     I18N — Language switching (EN / FR / ES)
+================================================================ -->
+<script>
+const I18N = {
+  en: {
+    'nav.whatWeDo':'What We Do','nav.howWeHelp':'How We Help Clients','nav.overview':'Overview',
+    'nav.gridConnection':'Grid Connection Acceleration','nav.altPower':'Alternative Power Coordination',
+    'nav.masterplanning':'Energy Masterplanning & Feasibility','nav.endToEnd':'End-to-End Project Execution',
+    'nav.regulatory':'Regulatory Navigation & Stakeholder Management',
+    'nav.howWeWork':'How We Work','nav.engagementModel':'Our Engagement Model',
+    'nav.techPartners':'Technology Partners','nav.executionApproach':'Our Approach to Execution',
+    'nav.industries':'Industries','nav.sectors':'Industries',
+    'nav.dataCenters':'Data Centers','nav.evCharging':'EV Charging Networks',
+    'nav.industrial':'Industrial & Manufacturing','nav.government':'Government & Sovereign Infrastructure',
+    'nav.chemicals':'Chemicals','nav.oilGas':'Oil & Gas','nav.healthcare':'Healthcare',
+    'nav.insights':'Insights','nav.knowledgeResearch':'Knowledge & Research',
+    'nav.reports':'Reports & Whitepapers','nav.perspectives':'Market Perspectives','nav.caseStudies':'Case Studies',
+    'nav.aboutUs':'About Us','nav.ourFirm':'Our Firm',
+    'nav.whoWeAre':'Who We Are','nav.ourLeadership':'Our Leadership',
+    'nav.missionPurpose':'Mission & Purpose','nav.governance':'Our Governance',
+    'nav.newsMedia':'News & Media','nav.mediaPress':'Media & Press',
+    'nav.pressReleases':'Press Releases','nav.inTheNews':'Heinnsof in the News',
+    'nav.events':'Events and Conferences','nav.mediaEnquiries':'Media Enquiries',
+    'nav.contact':'Contact','nav.getInTouch':'Get in Touch','nav.getInTouchLink':'Get in Touch',
+    'nav.feasibility':'Request a Feasibility Assessment','nav.partner':'Partner with Heinnsof',
+    'nav.careers':'Careers',
+    'home.globeEyebrow':'Global Reach','home.globeHeading':'Where We Operate',
+    'home.globeBody':'Heinnsof supports energy infrastructure projects across the UK, Europe, the Middle East, and North America — bringing local regulatory knowledge and network relationships to every mandate.',
+    'home.locLondon':'London, UK','home.locEurope':'European Capitals',
+    'home.locMiddleEast':'Middle East & Gulf','home.locNorthAmerica':'North America',
+    'footer.siteInfo':'Site Information','footer.cookieConsent':'Cookie Consent',
+    'footer.cookieNotices':'Cookie Notices','footer.scamAlert':'Scam and Fraud Alert',
+    'footer.terms':'Terms and Conditions','footer.privacy':'Privacy Note',
+    'footer.disclaimers':'Disclaimers','footer.accessibility':'Accessibility','footer.sitemap':'Sitemap'
+  },
+  fr: {
+    'nav.whatWeDo':'Ce que nous faisons','nav.howWeHelp':'Comment nous aidons nos clients','nav.overview':'Vue d\'ensemble',
+    'nav.gridConnection':'Accélération du raccordement au réseau','nav.altPower':'Coordination des énergies alternatives',
+    'nav.masterplanning':'Planification énergétique & faisabilité','nav.endToEnd':'Exécution de projet de bout en bout',
+    'nav.regulatory':'Navigation réglementaire & gestion des parties prenantes',
+    'nav.howWeWork':'Notre approche','nav.engagementModel':'Notre modèle d\'engagement',
+    'nav.techPartners':'Partenaires technologiques','nav.executionApproach':'Notre approche d\'exécution',
+    'nav.industries':'Industries','nav.sectors':'Industries',
+    'nav.dataCenters':'Centres de données','nav.evCharging':'Réseaux de recharge VE',
+    'nav.industrial':'Industrie & Fabrication','nav.government':'Gouvernement & Infrastructures souveraines',
+    'nav.chemicals':'Chimie','nav.oilGas':'Pétrole & Gaz','nav.healthcare':'Santé',
+    'nav.insights':'Perspectives','nav.knowledgeResearch':'Connaissances & Recherche',
+    'nav.reports':'Rapports & Livres blancs','nav.perspectives':'Perspectives de marché','nav.caseStudies':'Études de cas',
+    'nav.aboutUs':'À propos','nav.ourFirm':'Notre cabinet',
+    'nav.whoWeAre':'Qui sommes-nous','nav.ourLeadership':'Notre direction',
+    'nav.missionPurpose':'Mission & Objectif','nav.governance':'Notre gouvernance',
+    'nav.newsMedia':'Actualités & Médias','nav.mediaPress':'Médias & Presse',
+    'nav.pressReleases':'Communiqués de presse','nav.inTheNews':'Heinnsof dans les médias',
+    'nav.events':'Événements et conférences','nav.mediaEnquiries':'Demandes médias',
+    'nav.contact':'Contact','nav.getInTouch':'Nous contacter','nav.getInTouchLink':'Nous contacter',
+    'nav.feasibility':'Demander une évaluation de faisabilité','nav.partner':'Partenaire avec Heinnsof',
+    'nav.careers':'Carrières',
+    'home.globeEyebrow':'Portée mondiale','home.globeHeading':'Où nous opérons',
+    'home.globeBody':'Heinnsof soutient des projets d\'infrastructure énergétique au Royaume-Uni, en Europe, au Moyen-Orient et en Amérique du Nord.',
+    'home.locLondon':'Londres, Royaume-Uni','home.locEurope':'Capitales européennes',
+    'home.locMiddleEast':'Moyen-Orient & Golfe','home.locNorthAmerica':'Amérique du Nord',
+    'footer.siteInfo':'Informations du site','footer.cookieConsent':'Consentement aux cookies',
+    'footer.cookieNotices':'Avis sur les cookies','footer.scamAlert':'Alerte escroqueries et fraudes',
+    'footer.terms':'Conditions générales','footer.privacy':'Note de confidentialité',
+    'footer.disclaimers':'Avertissements','footer.accessibility':'Accessibilité','footer.sitemap':'Plan du site'
+  },
+  es: {
+    'nav.whatWeDo':'Lo que hacemos','nav.howWeHelp':'Cómo ayudamos a los clientes','nav.overview':'Descripción general',
+    'nav.gridConnection':'Aceleración de conexión a la red','nav.altPower':'Coordinación de energía alternativa',
+    'nav.masterplanning':'Planificación energética & Viabilidad','nav.endToEnd':'Ejecución de proyecto integral',
+    'nav.regulatory':'Navegación regulatoria & Gestión de partes interesadas',
+    'nav.howWeWork':'Cómo trabajamos','nav.engagementModel':'Nuestro modelo de participación',
+    'nav.techPartners':'Socios tecnológicos','nav.executionApproach':'Nuestro enfoque de ejecución',
+    'nav.industries':'Industrias','nav.sectors':'Industrias',
+    'nav.dataCenters':'Centros de datos','nav.evCharging':'Redes de carga VE',
+    'nav.industrial':'Industrial y Manufactura','nav.government':'Gobierno e Infraestructura soberana',
+    'nav.chemicals':'Química','nav.oilGas':'Petróleo y Gas','nav.healthcare':'Salud',
+    'nav.insights':'Perspectivas','nav.knowledgeResearch':'Conocimiento e Investigación',
+    'nav.reports':'Informes y Documentos técnicos','nav.perspectives':'Perspectivas de mercado','nav.caseStudies':'Casos de estudio',
+    'nav.aboutUs':'Sobre nosotros','nav.ourFirm':'Nuestra empresa',
+    'nav.whoWeAre':'Quiénes somos','nav.ourLeadership':'Nuestro liderazgo',
+    'nav.missionPurpose':'Misión y Propósito','nav.governance':'Nuestra gobernanza',
+    'nav.newsMedia':'Noticias y Medios','nav.mediaPress':'Medios y Prensa',
+    'nav.pressReleases':'Comunicados de prensa','nav.inTheNews':'Heinnsof en los medios',
+    'nav.events':'Eventos y conferencias','nav.mediaEnquiries':'Consultas de medios',
+    'nav.contact':'Contacto','nav.getInTouch':'Ponerse en contacto','nav.getInTouchLink':'Ponerse en contacto',
+    'nav.feasibility':'Solicitar una evaluación de viabilidad','nav.partner':'Asociarse con Heinnsof',
+    'nav.careers':'Carreras',
+    'home.globeEyebrow':'Alcance global','home.globeHeading':'Dónde operamos',
+    'home.globeBody':'Heinnsof apoya proyectos de infraestructura energética en el Reino Unido, Europa, Oriente Medio y América del Norte.',
+    'home.locLondon':'Londres, Reino Unido','home.locEurope':'Capitales europeas',
+    'home.locMiddleEast':'Oriente Medio y Golfo','home.locNorthAmerica':'América del Norte',
+    'footer.siteInfo':'Información del sitio','footer.cookieConsent':'Consentimiento de cookies',
+    'footer.cookieNotices':'Avisos de cookies','footer.scamAlert':'Alerta de fraudes y estafas',
+    'footer.terms':'Términos y condiciones','footer.privacy':'Nota de privacidad',
+    'footer.disclaimers':'Avisos legales','footer.accessibility':'Accesibilidad','footer.sitemap':'Mapa del sitio'
+  }
+};
+
+function setLanguage(lang) {
+  const dict = I18N[lang] || I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.documentElement.setAttribute('lang', lang);
+  const label = document.querySelector('#langBtn');
+  if (label) label.childNodes.forEach(n => { if (n.nodeType === 3) n.textContent = lang.toUpperCase(); });
+  localStorage.setItem('heinnsof-lang', lang);
+}
+(function() {
+  const saved = localStorage.getItem('heinnsof-lang') || 'en';
+  if (saved !== 'en') setLanguage(saved);
+})();
+</script>
+
+<!-- ================================================================
+     SEARCH
+================================================================ -->
+<script>
+const SEARCH_INDEX = [
+  {title:'What We Do — Overview',url:'what-we-do-overview.html',cat:'Services',keywords:'services energy advisory overview'},
+  {title:'Grid Connection Acceleration',url:'service-grid-connection.html',cat:'Services',keywords:'grid connection strategy acceleration network'},
+  {title:'Alternative Power Coordination',url:'service-alternative-power.html',cat:'Services',keywords:'alternative power temporary energy coordination'},
+  {title:'Energy Masterplanning & Feasibility',url:'service-energy-masterplanning.html',cat:'Services',keywords:'masterplanning feasibility energy planning'},
+  {title:'End-to-End Project Execution',url:'service-end-to-end-execution.html',cat:'Services',keywords:'execution project delivery management'},
+  {title:'Regulatory Navigation & Stakeholder Management',url:'service-regulatory-navigation.html',cat:'Services',keywords:'regulatory stakeholders policy government navigation'},
+  {title:'Data Centers',url:'sector-data-centres.html',cat:'Industries',keywords:'data centres hyperscale AI infrastructure colocation'},
+  {title:'EV Charging Networks',url:'sector-ev-charging.html',cat:'Industries',keywords:'EV charging electric vehicles infrastructure'},
+  {title:'Industrial & Manufacturing',url:'sector-industrial.html',cat:'Industries',keywords:'industrial manufacturing factory energy'},
+  {title:'Government & Sovereign Infrastructure',url:'sector-government.html',cat:'Industries',keywords:'government sovereign public sector infrastructure'},
+  {title:'Chemicals',url:'sector-chemicals.html',cat:'Industries',keywords:'chemicals processing petrochemical energy'},
+  {title:'Reports & Whitepapers',url:'insights-reports.html',cat:'Insights',keywords:'reports whitepapers research publications'},
+  {title:'Market Perspectives',url:'insights-perspectives.html',cat:'Insights',keywords:'perspectives analysis market intelligence trends'},
+  {title:'Case Studies',url:'insights-case-studies.html',cat:'Insights',keywords:'case studies projects work portfolio'},
+  {title:'Who We Are',url:'about-who-we-are.html',cat:'About Us',keywords:'about who firm advisory energy'},
+  {title:'Our Leadership',url:'about-leadership.html',cat:'About Us',keywords:'leadership team directors partners'},
+  {title:'Mission & Purpose',url:'about-mission-purpose.html',cat:'About Us',keywords:'mission purpose values commitment'},
+  {title:'Our Governance',url:'about-governance.html',cat:'About Us',keywords:'governance structure board oversight'},
+  {title:'How We Work — Overview',url:'how-we-work-overview.html',cat:'How We Work',keywords:'how we work process methodology overview'},
+  {title:'Our Engagement Model',url:'how-we-work-engagement.html',cat:'How We Work',keywords:'engagement model mandate advisory'},
+  {title:'Technology Partners',url:'how-we-work-technology-partners.html',cat:'How We Work',keywords:'technology partners tools platforms'},
+  {title:'Our Approach to Execution',url:'how-we-work-execution.html',cat:'How We Work',keywords:'execution approach delivery project'},
+  {title:'Contact',url:'contact.html',cat:'Contact',keywords:'contact get in touch enquiry'},
+  {title:'Careers',url:'careers.html',cat:'Company',keywords:'careers jobs work join team'},{title:'Sitemap',url:'sitemap.html',cat:'Site',keywords:'sitemap pages navigation structure'}
+];
+
+(function() {
+  const searchBtn = document.querySelector('.nav-search');
+  const overlay   = document.getElementById('search-overlay');
+  const input     = document.getElementById('search-input');
+  const resultsEl = document.getElementById('search-results');
+  const closeBtn  = document.getElementById('search-close');
+  const backdrop  = overlay ? overlay.querySelector('.search-backdrop') : null;
+  if (!searchBtn || !overlay) return;
+
+  function openSearch() {
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input && input.focus(), 60);
+  }
+  function closeSearch() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (input) input.value = '';
+    if (resultsEl) resultsEl.innerHTML = '';
+  }
+
+  searchBtn.addEventListener('click', openSearch);
+  if (closeBtn)  closeBtn.addEventListener('click', closeSearch);
+  if (backdrop)  backdrop.addEventListener('click', closeSearch);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
+  if (input) {
+    input.addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (!resultsEl) return;
+      if (q.length < 2) { resultsEl.innerHTML = ''; return; }
+      const matches = SEARCH_INDEX.filter(item =>
+        item.title.toLowerCase().includes(q) ||
+        item.keywords.toLowerCase().includes(q) ||
+        item.cat.toLowerCase().includes(q)
+      ).slice(0, 8);
+      if (!matches.length) {
+        resultsEl.innerHTML = '<p class="sr-empty">No results found.</p>';
+        return;
+      }
+      resultsEl.innerHTML = matches.map(m =>
+        `<a href="${m.url}" class="sr-item"><span class="sr-category">${m.cat}</span><span class="sr-title">${m.title}</span></a>`
+      ).join('');
+    });
+  }
+})();
+</script>
+</body>
+</html>
