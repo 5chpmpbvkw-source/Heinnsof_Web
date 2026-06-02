@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png?v=20260602" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg?v=20260602" />
   <link rel="shortcut icon" href="favicon/favicon.ico?v=20260602" />
@@ -115,14 +116,18 @@
     .about-images{overflow:hidden;}
     .about-img-grid{display:grid;grid-template-columns:1fr 1fr;height:480px;}
     .about-img-cell{background-size:cover;background-position:center;}
-    .diff-section{padding:80px 0;background:var(--light-bg);}
+    .diff-section{padding:80px 0 0;background:var(--light-bg);}
     .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule);margin-top:48px;}
     @media(max-width:1080px){.diff-grid{grid-template-columns:repeat(2,1fr);}}
     @media(max-width:600px){.diff-grid{grid-template-columns:1fr;}}
     .diff-card{background:#fff;padding:40px 32px;}
-    .diff-num{font-size:32px;font-weight:800;color:var(--principal);opacity:0.2;line-height:1;margin-bottom:20px;}
+    .diff-num{font-size:32px;font-weight:800;color:var(--principal);opacity:0.25;line-height:1;margin-bottom:20px;}
     .diff-title{font-size:17px;font-weight:700;color:var(--black);margin-bottom:12px;}
-    .diff-desc{font-size:14px;font-weight:300;color:var(--muted);line-height:1.7;}
+    .diff-desc{font-size:14px;font-weight:300;color:var(--body-text);line-height:1.7;}
+    .diff-cta{background:var(--dark-blue);padding:56px 72px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-left:-72px;margin-right:-72px;margin-top:48px;}
+    .diff-cta-text{font-size:clamp(18px,2vw,26px);font-weight:700;color:#fff;letter-spacing:-0.3px;}
+    @media(max-width:1080px){.diff-cta{margin-left:-40px;margin-right:-40px;padding:48px 40px;}}
+    @media(max-width:768px){.diff-cta{margin-left:-20px;margin-right:-20px;padding:36px 20px;flex-direction:column;align-items:flex-start;}}
     .leaders-section{padding:80px 0;}
     .leaders-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:48px;}
     .leader-card{display:flex;flex-direction:column;gap:16px;}
@@ -257,11 +262,10 @@
         <div class="mega-drop"><div class="mega-inner" style="grid-template-columns:1fr 1fr;">
           <div class="md-col"><span class="md-eyebrow" data-i18n="nav.howWeHelp">How We Help Clients</span><ul class="md-links">
             <li><a href="what-we-do-overview.html" data-i18n="nav.overview">Overview</a></li>
-            <li><a href="service-grid-connection.html" data-i18n="nav.gridConnection">Grid Connection Acceleration</a></li>
-            <li><a href="service-alternative-power.html" data-i18n="nav.altPower">Alternative Power Coordination</a></li>
-            <li><a href="service-energy-masterplanning.html" data-i18n="nav.masterplanning">Energy Masterplanning &amp; Feasibility</a></li>
-            <li><a href="service-end-to-end-execution.html" data-i18n="nav.endToEnd">End-to-End Project Execution</a></li>
-            <li><a href="service-regulatory-navigation.html" data-i18n="nav.regulatory">Regulatory Navigation &amp; Stakeholder Management</a></li>
+            <li><a href="service-grid-connection.html">Assessment and Strategy</a></li>
+            <li><a href="service-energy-masterplanning.html">Simulation and Feasibility</a></li>
+            <li><a href="service-end-to-end-execution.html">Project Management</a></li>
+            <li><a href="service-alternative-power.html">Deployment and Execution</a></li>
           </ul></div>
           <div class="md-col"><span class="md-eyebrow" data-i18n="nav.howWeWork">How We Work</span><ul class="md-links">
             <li><a href="how-we-work-overview.html" data-i18n="nav.overview">Overview</a></li>
@@ -376,6 +380,10 @@
   <div class="diff-card reveal d2"><div class="diff-num">03</div><div class="diff-title">Procurement independence</div><div class="diff-desc">We evaluate and select technology and contractors without commercial bias. Our recommendations are driven solely by what is right for the project — not by supplier relationships or referral fees.</div></div>
   <div class="diff-card reveal"><div class="diff-num">04</div><div class="diff-title">Client retains authority</div><div class="diff-desc">We coordinate across vendors, utilities, regulators, and EPCs — but the client retains full decision-making authority throughout. Heinnsof delivers board-ready reporting at every stage.</div></div>
   <div class="diff-card reveal d1"><div class="diff-num">05</div><div class="diff-title">Already have a strategy?</div><div class="diff-desc">Heinnsof converts existing theoretical advisory reports directly into executable, de-risked action plans — bridging the gap between strategic intent and actual delivery.</div></div>
+</div>
+<div class="diff-cta">
+  <div class="diff-cta-text">Ready to work with a partner who delivers?</div>
+  <a href="contact.html" class="btn btn-white">Get in Touch →</a>
 </div>
 </div></section>
 <footer>
