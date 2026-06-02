@@ -120,6 +120,10 @@
     .f-group textarea { min-height: 140px; resize: vertical; }
     .form-submit { background: var(--principal); color: #fff; font-family: var(--font); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; padding: 15px 40px; border: 1px solid var(--principal); width: 100%; transition: background var(--ease), border-color var(--ease); cursor: pointer; }
     .form-submit:hover { background: var(--wine-rose); border-color: var(--wine-rose); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-msg { display:none; padding: 14px 18px; font-size: 13px; font-weight: 500; margin-top: 4px; }
+    .form-msg.success { display:block; background: #f0faf4; color: #1a7a45; border-left: 3px solid #1a7a45; }
+    .form-msg.error { display:block; background: #fff5f5; color: #c0392b; border-left: 3px solid #c0392b; }
 
     @media (max-width: 1080px) { .nav-inner, .ph-shell, .contact-shell { padding-left: 40px; padding-right: 40px; } .footer-inner, .footer-bottom { padding-left: 40px; padding-right: 40px; } .footer-grid { grid-template-columns: repeat(3, 1fr); } .contact-shell { gap: 56px; } }
     @media (max-width: 768px) { .nav-inner { padding: 0 24px; overflow:hidden;} .nav-links, .nav-search { display: none; } .nav-hamburger { display: flex; } .ph-shell, .contact-shell { padding: 0 24px; } .contact-shell { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } .footer-inner { padding: 0 24px; } .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } .footer-bottom { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 8px; } }
@@ -401,11 +405,11 @@
       </div>
     </div>
     <div class="contact-form reveal d1">
-      <form onsubmit="return false;">
+      <form id="contact-form">
         <div class="form-row">
           <div class="f-group">
             <label for="fname">Full Name</label>
-            <input type="text" id="fname" name="fname" placeholder="Your name">
+            <input type="text" id="fname" name="fname" placeholder="Your name" required>
           </div>
           <div class="f-group">
             <label for="forg">Organisation</label>
@@ -414,13 +418,14 @@
         </div>
         <div class="f-group">
           <label for="femail">Email Address</label>
-          <input type="email" id="femail" name="femail" placeholder="your@email.com">
+          <input type="email" id="femail" name="femail" placeholder="your@email.com" required>
         </div>
         <div class="f-group">
           <label for="fmsg">Message</label>
-          <textarea id="fmsg" name="fmsg" placeholder="Tell us about your project or mandate…"></textarea>
+          <textarea id="fmsg" name="fmsg" placeholder="Tell us about your project or mandate…" required></textarea>
         </div>
-        <button type="submit" class="form-submit">Send Message</button>
+        <button type="submit" class="form-submit" id="form-btn">Send Message</button>
+        <div class="form-msg" id="form-msg"></div>
       </form>
     </div>
   </div>
@@ -711,6 +716,44 @@ const SEARCH_INDEX = [
       ).join('');
     });
   }
+})();
+</script>
+<script>
+(function(){
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxzlDtEnGUHfMsiQx7hIHoQ8bFcDdQ4AV_QZ3j9upOoen19MjwGcREIbw4bvr9EkM0/exec';
+  var form = document.getElementById('contact-form');
+  var btn  = document.getElementById('form-btn');
+  var msg  = document.getElementById('form-msg');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    msg.className = 'form-msg';
+    msg.textContent = '';
+
+    var params = new URLSearchParams({
+      fname:  document.getElementById('fname').value,
+      forg:   document.getElementById('forg').value,
+      femail: document.getElementById('femail').value,
+      fmsg:   document.getElementById('fmsg').value
+    });
+
+    fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body: params })
+      .then(function() {
+        msg.className = 'form-msg success';
+        msg.textContent = 'Thank you — your message has been received. We will be in touch shortly.';
+        form.reset();
+      })
+      .catch(function() {
+        msg.className = 'form-msg error';
+        msg.textContent = 'Something went wrong. Please try again or email us directly.';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+      });
+  });
 })();
 </script>
 </body>
