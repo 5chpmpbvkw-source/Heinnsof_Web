@@ -155,11 +155,16 @@
     }
     /* ── MOBILE OVERRIDES ── */
     @media (max-width: 768px) {
-      /* Nav: shrink tall logo on mobile */
-      .nav-inner { height: 64px !important; padding: 0 20px !important; overflow:hidden;}
+      /* Nav: mobile */
+      #nav { overflow: visible !important; }
+      .nav-inner { height: 64px !important; padding: 0 20px !important; overflow: visible !important; }
       .nav-logo img { height: 52px !important; }
       .nav-links, .nav-actions { display: none !important; }
-      .nav-hamburger { display: flex !important; }
+      .nav-hamburger { display: flex !important; min-width: 36px; }
+      .nav-hamburger span { background: var(--black) !important; }
+      body.dark-hero #nav:not(.scrolled) .nav-hamburger span { background: #fff !important; }
+      .nav-mobile { background: #fff !important; border-top: 1px solid var(--rule) !important; }
+      .nav-mobile.open { display: flex !important; }
       /* Hero padding compensation for smaller nav */
       .sector-hero, .svc-hero { padding: 110px 24px 60px !important; }
       .p-hero { padding: 110px 24px 60px !important; }
