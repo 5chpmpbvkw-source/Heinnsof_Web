@@ -1757,7 +1757,7 @@
     .nav-card-scrim {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(7,16,27,0.88) 0%, rgba(7,16,27,0.2) 60%, transparent 100%);
+      background: linear-gradient(to top, rgba(7,16,27,0.92) 0%, rgba(7,16,27,0.55) 50%, rgba(7,16,27,0.15) 100%);
       z-index: 1;
     }
     .nav-card-content { position: relative; z-index: 2; }
@@ -1767,8 +1767,9 @@
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--principal);
+      color: rgba(255,255,255,0.7);
       margin-bottom: 10px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
     .nav-card-title {
       font-size: 22px;
@@ -1777,6 +1778,7 @@
       line-height: 1.15;
       letter-spacing: -0.3px;
       margin-bottom: 16px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
     .nav-card-link {
       display: inline-flex;
@@ -1799,15 +1801,14 @@
     }
     @media (max-width: 540px) {
       #nav-cards { grid-template-columns: 1fr; }
-      .nav-card { height: 220px; border-right: none; }
-      /* Show person in image — shift focal point down */
-      .nav-card:nth-child(2) { background-position: center 65%; }
-      .nav-card:nth-child(4) { background-position: center 65%; }
+      .nav-card { height: 260px; border-right: none; }
+      /* Show face — anchor image to top so head/face is visible */
+      .nav-card:nth-child(2) { background-position: center 10%; }
+      .nav-card:nth-child(4) { background-position: center 10%; }
     }
     @media (max-width: 900px) {
-      /* Shift focal point on tablet 2-col view too */
-      .nav-card:nth-child(2) { background-position: center 65%; }
-      .nav-card:nth-child(4) { background-position: center 65%; }
+      .nav-card:nth-child(2) { background-position: center 10%; }
+      .nav-card:nth-child(4) { background-position: center 10%; }
     }
 
     /* =================================================================
