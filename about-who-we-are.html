@@ -161,6 +161,12 @@
     body.dark-hero #nav.scrolled .logo-white { display:none; }
 
   
+    /* ── 900px INTERMEDIATE ── */
+    @media(max-width:900px){
+      .sector-hero,.svc-hero,.p-hero,.page-header{padding:130px 40px 64px!important;}
+      .sh{padding:0 40px!important;}
+      .s-headline,.svc-headline,.p-headline{font-size:clamp(28px,5.5vw,52px)!important;}
+    }
     /* ── MOBILE OVERRIDES ── */
     @media (max-width: 768px) {
       /* Nav: shrink tall logo on mobile */
@@ -205,11 +211,25 @@
       .diff-grid { grid-template-columns: 1fr !important; }
       /* Search panel */
       .search-panel { top: 64px; width: 94vw; }
+      /* CTA band buttons — stack + full width */
+      .cta-btns { flex-direction: column !important; align-items: stretch !important; }
+      .cta-btns .btn { text-align:center; justify-content:center; width:100%; }
+      .inline-cta-actions .btn { width:100%; text-align:center; justify-content:center; }
     }
     @media (max-width: 480px) {
       .footer-grid { grid-template-columns: 1fr !important; }
       .experts-grid, .leaders-grid, .mission-grid { grid-template-columns: 1fr !important; }
       .form-row { grid-template-columns: 1fr !important; }
+      /* Extra small screen headings */
+      .s-headline,.svc-headline,.p-headline { font-size: clamp(24px,7vw,36px) !important; }
+      .cap-headline,.s-title,.svc-title { font-size: clamp(18px,5.5vw,28px) !important; }
+      /* Tighten section vertical padding */
+      .sh { padding: 0 16px !important; }
+      .nav-inner { padding: 0 16px !important; }
+      /* Work panels aspect ratio on very small screens */
+      .work-panel { min-height: 200px !important; }
+      /* Hero text tighter */
+      .s-desc,.svc-desc,.p-desc { font-size: 14px !important; line-height: 1.7 !important; }
     }
 
   </style>

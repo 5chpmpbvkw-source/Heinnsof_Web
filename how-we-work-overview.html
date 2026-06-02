@@ -139,6 +139,14 @@
     body.dark-hero #nav.scrolled .logo-white { display:none; }
 
   
+    /* 7-step approach grid */
+    .hww-steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+    /* ── 900px INTERMEDIATE ── */
+    @media(max-width:900px){
+      .sector-hero,.svc-hero,.p-hero,.page-header{padding:130px 40px 64px!important;}
+      .sh{padding:0 40px!important;}
+      .s-headline,.svc-headline,.p-headline{font-size:clamp(28px,5.5vw,52px)!important;}
+    }
     /* ── MOBILE OVERRIDES ── */
     @media (max-width: 768px) {
       /* Nav: shrink tall logo on mobile */
@@ -183,11 +191,25 @@
       .diff-grid { grid-template-columns: 1fr !important; }
       /* Search panel */
       .search-panel { top: 64px; width: 94vw; }
+      /* CTA band buttons — stack + full width */
+      .cta-btns { flex-direction: column !important; align-items: stretch !important; }
+      .cta-btns .btn { text-align:center; justify-content:center; width:100%; }
+      .inline-cta-actions .btn { width:100%; text-align:center; justify-content:center; }
     }
     @media (max-width: 480px) {
       .footer-grid { grid-template-columns: 1fr !important; }
       .experts-grid, .leaders-grid, .mission-grid { grid-template-columns: 1fr !important; }
       .form-row { grid-template-columns: 1fr !important; }
+      /* Extra small screen headings */
+      .s-headline,.svc-headline,.p-headline { font-size: clamp(24px,7vw,36px) !important; }
+      .cap-headline,.s-title,.svc-title { font-size: clamp(18px,5.5vw,28px) !important; }
+      /* Tighten section vertical padding */
+      .sh { padding: 0 16px !important; }
+      .nav-inner { padding: 0 16px !important; }
+      /* Work panels aspect ratio on very small screens */
+      .work-panel { min-height: 200px !important; }
+      /* Hero text tighter */
+      .s-desc,.svc-desc,.p-desc { font-size: 14px !important; line-height: 1.7 !important; }
     }
 
   </style>
@@ -331,7 +353,7 @@
       <h2 style="font-size:clamp(22px,2.5vw,36px);font-weight:700;color:#fff;letter-spacing:-0.5px;margin-bottom:12px;">Seven stages. One point of accountability.</h2>
       <p style="font-size:16px;font-weight:300;color:var(--gray-blue);line-height:1.8;max-width:520px;">The client manages one relationship. Heinnsof manages everything else.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
+    <div class="hww-steps-grid">
       <div style="padding:0 40px 40px 0;border-right:1px solid rgba(255,255,255,0.1);margin-bottom:40px;">
         <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--principal);margin-bottom:10px;">01</div>
         <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;">Diagnosis</div>
