@@ -852,50 +852,58 @@
     }
     .sectors-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 0;
       border: 1px solid var(--rule);
     }
     .sector-card {
-      padding: 32px 28px 36px;
+      padding: 32px 24px 36px;
       border-right: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
+      border-bottom: none;
       position: relative;
       transition: background var(--ease);
       overflow: hidden;
     }
-    .sector-card:nth-child(3n) { border-right: none; }
-    .sector-card:nth-child(n+4) { border-bottom: none; }
+    .sector-card:last-child { border-right: none; }
     .sector-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 2px;
+      height: 3px;
       background: var(--principal);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform var(--ease);
+      transition: transform 0.3s ease;
     }
     .sector-card:hover { background: var(--light-bg); }
     .sector-card:hover::before { transform: scaleX(1); }
     .sect-icon {
-      width: 32px;
-      height: 32px;
-      color: var(--principal);
-      margin-bottom: 16px;
-      opacity: 0.7;
+      width: 44px;
+      height: 44px;
+      background: var(--principal);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .sect-icon img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
     }
     .sect-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--black);
       margin-bottom: 10px;
-      line-height: 1.3;
+      line-height: 1.35;
       transition: color var(--ease);
     }
     .sector-card:hover .sect-title { color: var(--principal); }
     .sect-desc {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 300;
       color: var(--muted);
       line-height: 1.7;
@@ -1640,11 +1648,10 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); row-gap: 40px; }
       .stat-col { border-right: none; padding-left: 0 !important; }
       .stat-col:nth-child(odd) { border-right: 1px solid var(--rule); padding-right: 40px; }
-      .sectors-grid { grid-template-columns: repeat(2, 1fr); }
-      .sector-card:nth-child(3n)   { border-right: 1px solid var(--rule); }
-      .sector-card:nth-child(2n)   { border-right: none; }
-      .sector-card:nth-child(n+5)  { border-bottom: none; }
-      .sector-card:nth-child(n+3):nth-child(-n+4) { border-bottom: 1px solid var(--rule); }
+      .sectors-grid { grid-template-columns: repeat(3, 1fr); }
+      .sector-card { border-bottom: 1px solid var(--rule); }
+      .sector-card:nth-child(3n) { border-right: none; }
+      .sector-card:nth-child(n+4) { border-bottom: none; }
       .approach-steps { grid-template-columns: 1fr; gap: 40px; }
       .step-card { padding: 0 !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 40px !important; }
       .step-card:last-child { border-bottom: none; padding-bottom: 0 !important; }
@@ -1691,9 +1698,9 @@
 
       #sectors { padding: 72px 0; }
       .sectors-shell { padding: 0 24px; }
-      .sectors-grid { grid-template-columns: 1fr; }
-      .sector-card { border-right: none !important; }
-      .sector-card:nth-child(n) { border-bottom: 1px solid var(--rule); }
+      .sectors-grid { grid-template-columns: 1fr 1fr; }
+      .sector-card { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+      .sector-card:nth-child(2n) { border-right: none; }
       .sector-card:last-child { border-bottom: none; }
 
       #approach { padding: 72px 0; }
@@ -2773,34 +2780,29 @@
     </div>
     <div class="sectors-grid">
       <a href="sector-data-centres.html" class="sector-card reveal">
-        <div class="sect-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="24" height="6" rx="1"/><rect x="4" y="18" width="24" height="6" rx="1"/><circle cx="26" cy="11" r="1" fill="currentColor"/><circle cx="26" cy="21" r="1" fill="currentColor"/></svg></div>
-        <div class="sect-title">Data Centres and AI Infrastructure</div>
-        <div class="sect-desc">Grid delays of 7 to 10 years are the single largest constraint on European data centre deployment. We solve it.</div>
+        <div class="sect-icon"><img src="servers.png" alt="Data Centers"></div>
+        <div class="sect-title">Data Centers &amp; AI Infrastructure</div>
+        <div class="sect-desc">Grid delays of 7–10 years are the single largest constraint on European data centre deployment. We solve it.</div>
       </a>
       <a href="sector-ev-charging.html" class="sector-card reveal d1">
-        <div class="sect-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4v8H6l6 16V20h4L10 4z"/><path d="M20 4v10h2v14"/></svg></div>
+        <div class="sect-icon"><img src="ev-charging-plug.png" alt="EV Charging"></div>
         <div class="sect-title">EV Charging Networks</div>
         <div class="sect-desc">60% of planned EV chargers in Europe are delayed by grid constraints. We design around them.</div>
       </a>
       <a href="sector-industrial.html" class="sector-card reveal d2">
-        <div class="sect-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26V14l6-4v4l6-4v4l6-4v16H4z"/><path d="M14 26v-6h4v6"/></svg></div>
-        <div class="sect-title">Industrial and Manufacturing</div>
+        <div class="sect-icon"><img src="factory (1).png" alt="Industrial"></div>
+        <div class="sect-title">Industrial &amp; Manufacturing</div>
         <div class="sect-desc">Gigafactories, pharmaceutical facilities, and semiconductor fabs face the same grid dynamics. We bridge the gap.</div>
       </a>
-      <a href="sector-government.html" class="sector-card reveal">
-        <div class="sect-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 28h24M16 6l12 8H4l12-8z"/><rect x="6" y="14" width="4" height="14"/><rect x="14" y="14" width="4" height="14"/><rect x="22" y="14" width="4" height="14"/></svg></div>
-        <div class="sect-title">Government and Sovereign Infrastructure</div>
+      <a href="sector-chemicals.html" class="sector-card reveal d3">
+        <div class="sect-icon"><img src="molecule.png" alt="Chemicals"></div>
+        <div class="sect-title">Chemicals</div>
+        <div class="sect-desc">High-energy chemical and processing facilities requiring bespoke grid and power access strategies.</div>
+      </a>
+      <a href="sector-government.html" class="sector-card reveal d4">
+        <div class="sect-icon"><img src="bank.png" alt="Government"></div>
+        <div class="sect-title">Government &amp; Sovereign Infrastructure</div>
         <div class="sect-desc">Specialist execution for public sector bodies that need delivery — not another strategy document.</div>
-      </a>
-      <a href="sector-gigafactories.html" class="sector-card reveal d1">
-        <div class="sect-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l4 8h8l-6.5 5 2.5 8L16 20l-8 5 2.5-8L4 12h8l4-8z"/></svg></div>
-        <div class="sect-title">Gigafactories and Green Hydrogen</div>
-        <div class="sect-desc">200 to 500 MW of firm power on development timelines. We design the bridge.</div>
-      </a>
-      <a href="sector-ports.html" class="sector-card reveal d2">
-        <div class="sect-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h24M16 4v18M8 14l8-10 8 10"/><path d="M6 22v4M26 22v4"/></svg></div>
-        <div class="sect-title">Ports and Logistics</div>
-        <div class="sect-desc">Cold ironing and terminal electrification require grid capacity that was never built. We build around it.</div>
       </a>
     </div>
   </div>
