@@ -48,8 +48,8 @@
     #nav { position: fixed; inset: 0 0 auto; z-index: 1000; background: #fff; border-bottom: 1px solid var(--rule); transition: transform var(--ease), box-shadow var(--ease); overflow: visible; }
     #nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
     #nav.hidden { transform: translateY(-100%); }
-    .nav-inner { max-width: 1240px; margin: 0 auto; padding: 0 72px; height:132px; display: flex; align-items: center; gap: 32px; overflow:hidden;}
-    .nav-logo img { height:120px; width: auto; }
+    .nav-inner { max-width: 1240px; margin: 0 auto; padding: 0 72px; height:98px; display: flex; align-items: center; gap: 32px; overflow:hidden;}
+    .nav-logo img { height:86px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; flex: 1; }
     .nav-links a { font-size: 13px; font-weight: 400; color: var(--black); letter-spacing: 0.01em; position: relative; padding-bottom: 2px; transition: color var(--ease); }
     .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--principal); transition: width var(--ease); }
@@ -73,7 +73,7 @@
     .has-drop { position: static; }
     .has-drop > a { display: inline-flex !important; align-items: center; gap: 4px; }
     .has-drop > a::after { display: none !important; }
-    .mega-drop { position: fixed; top:132px; left: 0; width: 100%; background: #fff; border-top:2px solid var(--principal); border-bottom: 1px solid var(--rule); box-shadow: 0 20px 60px rgba(0,0,0,0.10); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; z-index: 997; pointer-events: none; }
+    .mega-drop { position: fixed; top:98px; left: 0; width: 100%; background: #fff; border-top:2px solid var(--principal); border-bottom: 1px solid var(--rule); box-shadow: 0 20px 60px rgba(0,0,0,0.10); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; z-index: 997; pointer-events: none; }
     .mega-drop.is-open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: all; }
     .mega-inner { max-width: 1240px; margin: 0 auto; padding: 40px 72px; display: grid; gap: 48px; align-items: start; }
     .md-eyebrow { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 18px; }
@@ -120,7 +120,7 @@
     .footer-iso-logo { height: 24px; width: auto; opacity:0.85; flex-shrink: 0; }
 
     /* PAGE HEADER */
-    .page-header { background: var(--dark-blue); padding:210px 0 80px; position: relative; overflow: hidden; }
+    .page-header { background: var(--dark-blue); padding:175px 0 80px; position: relative; overflow: hidden; }
     .page-header::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 28px 28px; }
     .page-header::after { content: ''; position: absolute; top: -100px; right: -60px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(140,0,50,0.10) 0%, transparent 70%); pointer-events: none; }
     .ph-shell { max-width: 1240px; margin: 0 auto; padding: 0 72px; position: relative; z-index: 1; }

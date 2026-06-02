@@ -51,8 +51,8 @@
     #nav { position: fixed; inset: 0 0 auto; z-index: 1000; background: #fff; border-bottom: 1px solid var(--rule); transition: transform var(--ease), box-shadow var(--ease); overflow: visible; }
     #nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
     #nav.hidden { transform: translateY(-100%); }
-    .nav-inner { max-width: 1240px; margin: 0 auto; padding: 0 72px; height:132px; display: flex; align-items: center; gap: 32px; overflow:hidden;}
-    .nav-logo img { height:120px; width: auto; }
+    .nav-inner { max-width: 1240px; margin: 0 auto; padding: 0 72px; height:98px; display: flex; align-items: center; gap: 32px; overflow:hidden;}
+    .nav-logo img { height:86px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; flex: 1; }
     .nav-links a { font-size: 13px; font-weight: 400; color: var(--black); letter-spacing: 0.01em; position: relative; padding-bottom: 2px; transition: color var(--ease); }
     .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--principal); transition: width var(--ease); }
@@ -79,7 +79,7 @@
     .nav-chevron { width: 10px; height: 10px; flex-shrink: 0; transition: transform 0.2s ease; color: var(--muted); }
     .has-drop.is-open > a .nav-chevron { transform: rotate(180deg); }
     .has-drop.is-open > a { color: var(--principal); }
-    .mega-drop { position: fixed; top:132px; left: 0; width: 100%; background: #fff; border-top:2px solid var(--principal); border-bottom: 1px solid var(--rule); box-shadow: 0 20px 60px rgba(0,0,0,0.10); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; z-index: 997; pointer-events: none; }
+    .mega-drop { position: fixed; top:98px; left: 0; width: 100%; background: #fff; border-top:2px solid var(--principal); border-bottom: 1px solid var(--rule); box-shadow: 0 20px 60px rgba(0,0,0,0.10); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s; z-index: 997; pointer-events: none; }
     .mega-drop.is-open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: all; }
     .mega-inner { max-width: 1240px; margin: 0 auto; padding: 40px 72px; display: grid; grid-template-columns: 1fr 1fr 1fr 260px; gap: 48px; align-items: start; }
     .md-eyebrow { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 18px; }
