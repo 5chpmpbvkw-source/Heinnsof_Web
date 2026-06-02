@@ -1800,6 +1800,14 @@
     @media (max-width: 540px) {
       #nav-cards { grid-template-columns: 1fr; }
       .nav-card { height: 220px; border-right: none; }
+      /* Show person in image — shift focal point down */
+      .nav-card:nth-child(2) { background-position: center 65%; }
+      .nav-card:nth-child(4) { background-position: center 65%; }
+    }
+    @media (max-width: 900px) {
+      /* Shift focal point on tablet 2-col view too */
+      .nav-card:nth-child(2) { background-position: center 65%; }
+      .nav-card:nth-child(4) { background-position: center 65%; }
     }
 
     /* =================================================================
@@ -2383,7 +2391,7 @@
 
     @media (max-width: 1080px) {
       .nav-inner { padding: 0 32px !important; gap: 20px !important; height: 64px !important; overflow:hidden;}
-      .nav-logo img { height: 40px !important; }
+      .nav-logo img { height: 52px !important; }
       .mega-drop { top: 64px !important; }
     }
     @media (max-width: 900px) {
@@ -2403,7 +2411,7 @@
     @media (max-width: 768px) {
       /* Nav: shrink tall logo on mobile */
       .nav-inner { height: 64px !important; padding: 0 20px !important; overflow:hidden;}
-      .nav-logo img { height: 40px !important; }
+      .nav-logo img { height: 52px !important; }
       .nav-links, .nav-actions { display: none !important; }
       .nav-hamburger { display: flex !important; }
       /* Hero padding compensation for smaller nav */
@@ -2864,7 +2872,7 @@
 
     <div class="mission-panel reveal d2">
       <div class="mission-num">02</div>
-      <div class="mission-img-block" style="background-image:url('Brand_assets/Image inventory/Decarbonisation.jpg');"></div>
+      <div class="mission-img-block" style="background-image:url('Brand_assets/Image inventory/Decarbonisation.jpg');background-position:center 65%;"></div>
       <div class="mission-title">Decarbonisation Without Compromise</div>
       <p class="mission-body">Our dedication to low-carbon alternative power solutions that advance net-zero objectives without sacrificing reliability or commercial performance.</p>
     </div>
