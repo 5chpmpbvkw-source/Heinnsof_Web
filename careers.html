@@ -144,7 +144,7 @@
     .cta-btns { position: relative; z-index: 1; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
     @media (max-width: 1080px) { .nav-inner, .ph-shell, .ci-shell, .pos-shell, #cta-band { padding-left: 40px; padding-right: 40px; } .footer-inner, .footer-bottom { padding-left: 40px; padding-right: 40px; } .footer-grid { grid-template-columns: repeat(3, 1fr); } .ci-shell { grid-template-columns: 1fr; gap: 56px; } }
-    @media (max-width: 768px) { .nav-inner { padding: 0 24px; overflow:hidden;} .nav-links, .nav-search { display: none; } .nav-hamburger { display: flex; } .ph-shell { padding: 0 24px; } .ci-shell, .pos-shell { padding: 0 24px; } .pos-empty { padding: 40px 24px; } #cta-band { padding: 72px 24px; } .footer-inner { padding: 0 24px; } .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } .footer-bottom { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 8px; } }
+    @media (max-width: 768px) { .nav-inner { padding: 0 24px; overflow:visible;} .nav-links, .nav-search { display: none; } .nav-hamburger { display: flex; } .ph-shell { padding: 0 24px; } .ci-shell, .pos-shell { padding: 0 24px; } .pos-empty { padding: 40px 24px; } #cta-band { padding: 72px 24px; } .footer-inner { padding: 0 24px; } .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } .footer-bottom { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 8px; } }
 
     /* ============================================================
        CAREERS REDESIGN — NEW SECTIONS
@@ -291,7 +291,7 @@
       .mega-drop { top: 64px !important; }
     }
     @media (max-width: 900px) {
-      .nav-inner { padding: 0 20px !important; gap: 12px !important; overflow:hidden;}
+      .nav-inner { padding: 0 20px !important; gap: 12px !important; overflow:visible;}
       .nav-logo img { height: 36px !important; }
       .nav-links { gap: 12px !important; }
       .nav-links a { font-size: 12px !important; }
