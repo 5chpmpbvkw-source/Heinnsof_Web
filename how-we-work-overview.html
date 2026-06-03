@@ -96,13 +96,13 @@
     .footer-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,0.22);}
     .footer-tagline{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:300;color:rgba(255,255,255,0.45);}
     .footer-iso-logo{height:24px;width:auto;opacity:0.85;flex-shrink:0;}
-    .p-hero{background:linear-gradient(to bottom,rgba(7,16,27,0.60) 0%,rgba(7,16,27,0.88) 100%),url('Brand_assets/Image inventory/News 2 .jpg') center/cover no-repeat;padding:175px 0 80px;position:relative;overflow:hidden;}
+    .p-hero{background:linear-gradient(to bottom,rgba(7,16,27,0.60) 0%,rgba(7,16,27,0.88) 100%),url('Brand_assets/Image inventory/News 2 .jpg') center/cover no-repeat;padding:175px 0 80px;position:relative;overflow:visible;}
     .p-hero::before{content:'';position:absolute;inset:0;pointer-events:none;}
     .sh{max-width:1240px;margin:0 auto;padding:0 72px;position:relative;z-index:1;}
     .p-eyebrow{display:block;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:20px;}
     .p-headline{font-size:clamp(36px,4.5vw,64px);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px;max-width:800px;}
     .p-desc{font-size:17px;font-weight:300;color:rgba(255,255,255,0.88);line-height:1.75;max-width:620px;}
-    .banner-strip{background:var(--principal);padding:48px 0;position:relative;overflow:hidden;}
+    .banner-strip{background:var(--principal);padding:48px 0;position:relative;overflow:visible;}
     .banner-strip::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:56px 56px;}
     .banner-quote{position:relative;z-index:1;font-size:clamp(20px,3vw,36px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.5px;max-width:900px;}
     .alt-sections{padding:0;}
@@ -111,7 +111,7 @@
     .alt-row.reverse{direction:rtl;}
     .alt-row.reverse>*{direction:ltr;}
     .alt-text{padding:72px 80px;display:flex;flex-direction:column;justify-content:center;}
-    .alt-visual{background:linear-gradient(135deg,var(--principal) 0%,#590020 40%,var(--dark-blue) 100%);position:relative;overflow:hidden;}
+    .alt-visual{background:linear-gradient(135deg,var(--principal) 0%,#590020 40%,var(--dark-blue) 100%);position:relative;overflow:visible;}
     .alt-visual::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;}
     .alt-eye{display:block;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--principal);margin-bottom:16px;}
     .alt-head{font-size:clamp(20px,2.5vw,32px);font-weight:700;color:var(--black);letter-spacing:-0.5px;margin-bottom:16px;}
@@ -130,7 +130,10 @@
     body.dark-hero #nav { background:transparent; border-bottom-color:transparent; box-shadow:none; transition:background 0.3s,border-color 0.3s,box-shadow 0.3s; }
     body.dark-hero #nav .nav-links a { color:rgba(255,255,255,0.85); }
     body.dark-hero #nav .nav-links a:hover { color:#fff; }
-    body.dark-hero #nav .nav-hamburger span { background:#fff; }
+    body.dark-hero #nav .nav-hamburger svg path { stroke:#fff; }
+    body.dark-hero #nav .nav-hamburger { border-color:rgba(255,255,255,0.3); }
+    body.dark-hero #nav .nav-flip-front, body.dark-hero #nav .nav-flip-back { color:rgba(255,255,255,0.85); }
+    body.dark-hero #nav .nav-glow-item:hover .nav-flip-front, body.dark-hero #nav .nav-glow-item:hover .nav-flip-back { color:#fff; }
     body.dark-hero #nav .nav-search { color:rgba(255,255,255,0.85); }
     body.dark-hero #nav .lang-btn { color:rgba(255,255,255,0.85); }
     body.dark-hero #nav .logo-color { display:none; }
@@ -139,7 +142,8 @@
     body.dark-hero #nav.scrolled .nav-chevron { color:var(--muted); }
     body.dark-hero #nav.scrolled { background:#fff; border-bottom:1px solid var(--rule); box-shadow:0 2px 16px rgba(0,0,0,0.06); }
     body.dark-hero #nav.scrolled .nav-links a { color:var(--black); }
-    body.dark-hero #nav.scrolled .nav-hamburger span { background:var(--black); }
+    body.dark-hero #nav.scrolled .nav-hamburger svg path { stroke:var(--black); }
+    body.dark-hero #nav.scrolled .nav-hamburger { border-color:var(--rule); }
     body.dark-hero #nav.scrolled .nav-search { color:var(--black); }
     body.dark-hero #nav.scrolled .lang-btn { color:var(--black); }
     body.dark-hero #nav.scrolled .logo-color { display:block; }
@@ -161,11 +165,11 @@
       .nav-inner { height: 64px !important; padding: 0 20px !important; overflow: visible !important; }
       .nav-logo img { height: 52px !important; }
       .nav-links, .nav-actions { display: none !important; }
-      .nav-hamburger { display: flex !important; min-width: 36px; }
-      .nav-hamburger span { background: var(--black) !important; }
-      body.dark-hero #nav:not(.scrolled) .nav-hamburger span { background: #fff !important; }
-      .nav-mobile { background: #fff !important; border-top: 1px solid var(--rule) !important; }
-      .nav-mobile.open { display: flex !important; }
+      .nav-hamburger { display: flex !important; }
+      .nav-hamburger svg path { stroke: var(--black) !important; }
+      body.dark-hero #nav:not(.scrolled) .nav-hamburger svg path { stroke: #fff !important; }
+      body.dark-hero #nav:not(.scrolled) .nav-hamburger { border-color: rgba(255,255,255,0.3) !important; }
+      
       /* Hero padding compensation for smaller nav */
       .sector-hero, .svc-hero { padding: 110px 24px 60px !important; }
       .p-hero { padding: 110px 24px 60px !important; }
@@ -294,13 +298,34 @@
       <button class="nav-search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg></button></div>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
-  <div class="nav-mobile" id="nav-mobile">
-    <a href="what-we-do-overview.html" class="mob-link" data-i18n="nav.whatWeDo">What We Do</a>
-    <a href="industries.html" class="mob-link" data-i18n="nav.industries">Industries</a>
-    <a href="insights.html" class="mob-link" data-i18n="nav.insights">Insights</a>
-    <a href="about-who-we-are.html" class="mob-link" data-i18n="nav.aboutUs">About Us</a>
-    <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
-    <a href="contact.html" class="mob-link" style="color:var(--principal);" data-i18n="nav.getInTouchLink">Get in Touch →</a>
+    <div id="nav-mobile" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+    <div id="mobile-backdrop"></div>
+    <div id="mobile-panel">
+      <button id="mobile-close" aria-label="Close menu">&#x2715;</button>
+      <nav class="mobile-menu-list">
+        <div class="mob-item">
+          <span class="mob-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+          <a href="what-we-do-overview.html" class="mob-link" data-i18n="nav.whatWeDo">What We Do</a>
+        </div>
+        <div class="mob-item">
+          <span class="mob-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+          <a href="industries.html" class="mob-link" data-i18n="nav.industries">Industries</a>
+        </div>
+        <div class="mob-item">
+          <span class="mob-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+          <a href="insights.html" class="mob-link" data-i18n="nav.insights">Insights</a>
+        </div>
+        <div class="mob-item">
+          <span class="mob-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+          <a href="about-who-we-are.html" class="mob-link" data-i18n="nav.aboutUs">About Us</a>
+        </div>
+        <div class="mob-item">
+          <span class="mob-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+          <a href="contact.html" class="mob-link" data-i18n="nav.contact">Contact</a>
+        </div>
+      </nav>
+      <a href="contact.html" class="mobile-cta" data-i18n="nav.getInTouchLink">Get in Touch &rarr;</a>
+    </div>
   </div>
 </nav>
 <div id="search-overlay" role="dialog" aria-label="Search" aria-modal="true">
@@ -426,9 +451,15 @@
   const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   (function(){const triggers=document.querySelectorAll('.has-drop');let ct=null;function open(t){clearTimeout(ct);triggers.forEach(x=>{if(x!==t){x.classList.remove('is-open');const d=x.querySelector('.mega-drop');if(d)d.classList.remove('is-open');}});t.classList.add('is-open');const d=t.querySelector('.mega-drop');if(d)d.classList.add('is-open');}function close(t){ct=setTimeout(()=>{t.classList.remove('is-open');const d=t.querySelector('.mega-drop');if(d)d.classList.remove('is-open');},120);}triggers.forEach(t=>{t.addEventListener('mouseenter',()=>open(t));t.addEventListener('mouseleave',()=>close(t));});document.addEventListener('keydown',e=>{if(e.key==='Escape')triggers.forEach(t=>{t.classList.remove('is-open');const d=t.querySelector('.mega-drop');if(d)d.classList.remove('is-open');});});})();
-  const hbtn=document.getElementById('hamburger'),mob=document.getElementById('nav-mobile');
-  hbtn.addEventListener('click',()=>{hbtn.classList.toggle('open');mob.classList.toggle('open');});
-  mob.querySelectorAll('.mob-link').forEach(a=>a.addEventListener('click',()=>{hbtn.classList.remove('open');mob.classList.remove('open');}));
+  /* Mobile hamburger + slide panel */
+  const hbtn = document.getElementById('hamburger');
+  const mob  = document.getElementById('nav-mobile');
+  function openMenu()  { hbtn.setAttribute('aria-expanded','true');  mob.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeMenu() { hbtn.setAttribute('aria-expanded','false'); mob.setAttribute('aria-hidden','true');  document.body.style.overflow=''; }
+  hbtn.addEventListener('click', () => hbtn.getAttribute('aria-expanded')==='true' ? closeMenu() : openMenu());
+  document.getElementById('mobile-backdrop').addEventListener('click', closeMenu);
+  document.getElementById('mobile-close').addEventListener('click', closeMenu);
+  mob.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', closeMenu));
   (function(){const lb=document.getElementById('langBtn'),ld=document.getElementById('langDrop');if(!lb||!ld)return;lb.addEventListener('click',function(e){e.stopPropagation();const o=ld.classList.toggle('is-open');lb.classList.toggle('is-open',o);lb.setAttribute('aria-expanded',String(o));});document.addEventListener('click',function(){ld.classList.remove('is-open');lb.classList.remove('is-open');lb.setAttribute('aria-expanded','false');});})();
 </script>
 <script>
