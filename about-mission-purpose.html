@@ -147,8 +147,8 @@
     body.dark-hero #nav { background:transparent; border-bottom-color:transparent; box-shadow:none; transition:background 0.3s,border-color 0.3s,box-shadow 0.3s; }
     body.dark-hero #nav .nav-links a { color:rgba(255,255,255,0.85); }
     body.dark-hero #nav .nav-links a:hover { color:#fff; }
-    body.dark-hero #nav .nav-hamburger svg path { stroke:#fff; }
-    body.dark-hero #nav .nav-hamburger { border-color:rgba(255,255,255,0.3); }
+    body.dark-hero #nav .hb-line { background:#fff; }
+    body.dark-hero #nav .nav-hamburger { opacity:1; }
     body.dark-hero #nav .nav-flip-front, body.dark-hero #nav .nav-flip-back { color:rgba(255,255,255,0.85); }
     body.dark-hero #nav .nav-glow-item:hover .nav-flip-front, body.dark-hero #nav .nav-glow-item:hover .nav-flip-back { color:#fff; }
     body.dark-hero #nav .nav-search { color:rgba(255,255,255,0.85); }
@@ -159,8 +159,7 @@
     body.dark-hero #nav.scrolled .nav-chevron { color:var(--muted); }
     body.dark-hero #nav.scrolled { background:#fff; border-bottom:1px solid var(--rule); box-shadow:0 2px 16px rgba(0,0,0,0.06); }
     body.dark-hero #nav.scrolled .nav-links a { color:var(--black); }
-    body.dark-hero #nav.scrolled .nav-hamburger svg path { stroke:var(--black); }
-    body.dark-hero #nav.scrolled .nav-hamburger { border-color:var(--rule); }
+    body.dark-hero #nav.scrolled .hb-line { background:var(--black); }
     body.dark-hero #nav.scrolled .nav-search { color:var(--black); }
     body.dark-hero #nav.scrolled .lang-btn { color:var(--black); }
     body.dark-hero #nav.scrolled .logo-color { display:block; }
@@ -194,9 +193,8 @@
       .nav-logo img { height: 52px !important; }
       .nav-links, .nav-actions { display: none !important; }
       .nav-hamburger { display: flex !important; }
-      .nav-hamburger svg path { stroke: var(--black) !important; }
-      body.dark-hero #nav:not(.scrolled) .nav-hamburger svg path { stroke: #fff !important; }
-      body.dark-hero #nav:not(.scrolled) .nav-hamburger { border-color: rgba(255,255,255,0.3) !important; }
+      .hb-line { background: var(--black) !important; }
+      body.dark-hero #nav:not(.scrolled) .hb-line { background: #fff !important; }
       
       /* Hero padding compensation for smaller nav */
       .sector-hero, .svc-hero { padding: 110px 24px 60px !important; }

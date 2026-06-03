@@ -59,15 +59,11 @@
     .nav-search { display:flex; align-items:center; justify-content:center; width:36px; height:36px; background:none; border:none; color:var(--black); cursor:pointer; transition:color var(--ease); }
     .nav-search:hover { color:var(--principal); }
     .nav-search svg { width:18px; height:18px; }
-        .nav-hamburger { display: none; align-items: center; justify-content: center; width: 36px; height: 36px; background: none; border: 1px solid var(--rule); border-radius: 8px; padding: 0; cursor: pointer; flex-shrink: 0; }
-    .nav-hamburger svg { display: block; }
-    .nav-hamburger svg path { stroke: var(--black); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
-    .nav-hamburger svg path:nth-child(1) { transform-origin: center; transform: translateY(-7px); transition: transform 0.3s cubic-bezier(.5,.85,.25,1.1); }
-    .nav-hamburger svg path:nth-child(2) { transform-origin: center; transition: transform 0.3s cubic-bezier(.5,.85,.25,1.8); }
-    .nav-hamburger svg path:nth-child(3) { transform-origin: center; transform: translateY(7px); transition: transform 0.3s cubic-bezier(.5,.85,.25,1.1); }
-    .nav-hamburger[aria-expanded="true"] svg path:nth-child(1) { transform: translateY(0) rotate(315deg); }
-    .nav-hamburger[aria-expanded="true"] svg path:nth-child(2) { transform: rotate(45deg); }
-    .nav-hamburger[aria-expanded="true"] svg path:nth-child(3) { transform: translateY(0) rotate(135deg); }
+            .nav-hamburger { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; padding: 8px; cursor: pointer; flex-shrink: 0; margin-left: auto; }
+    .hb-line { display: block; width: 22px; height: 2px; background: var(--black); border-radius: 1px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+    .nav-hamburger[aria-expanded="true"] .hb-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger[aria-expanded="true"] .hb-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger[aria-expanded="true"] .hb-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     #nav-mobile { position: fixed; inset: 0; z-index: 1100; pointer-events: none; }
     #nav-mobile[aria-hidden="false"] { pointer-events: auto; }
     #mobile-backdrop { position: absolute; inset: 0; background: rgba(13,24,38,0.45); opacity: 0; transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1); }
@@ -219,8 +215,8 @@
     body.dark-hero #nav { background:transparent; border-bottom-color:transparent; box-shadow:none; transition:background 0.3s,border-color 0.3s,box-shadow 0.3s; }
     body.dark-hero #nav .nav-links a { color:rgba(255,255,255,0.85); }
     body.dark-hero #nav .nav-links a:hover { color:#fff; }
-    body.dark-hero #nav .nav-hamburger svg path { stroke:#fff; }
-    body.dark-hero #nav .nav-hamburger { border-color:rgba(255,255,255,0.3); }
+    body.dark-hero #nav .hb-line { background:#fff; }
+    body.dark-hero #nav .nav-hamburger { opacity:1; }
     body.dark-hero #nav .nav-flip-front, body.dark-hero #nav .nav-flip-back { color:rgba(255,255,255,0.85); }
     body.dark-hero #nav .nav-glow-item:hover .nav-flip-front, body.dark-hero #nav .nav-glow-item:hover .nav-flip-back { color:#fff; }
     body.dark-hero #nav .nav-search { color:rgba(255,255,255,0.85); }
@@ -231,8 +227,7 @@
     body.dark-hero #nav.scrolled .nav-chevron { color:var(--muted); }
     body.dark-hero #nav.scrolled { background:#fff; border-bottom:1px solid var(--rule); box-shadow:0 2px 16px rgba(0,0,0,0.06); }
     body.dark-hero #nav.scrolled .nav-links a { color:var(--black); }
-    body.dark-hero #nav.scrolled .nav-hamburger svg path { stroke:var(--black); }
-    body.dark-hero #nav.scrolled .nav-hamburger { border-color:var(--rule); }
+    body.dark-hero #nav.scrolled .hb-line { background:var(--black); }
     body.dark-hero #nav.scrolled .nav-search { color:var(--black); }
     body.dark-hero #nav.scrolled .lang-btn { color:var(--black); }
     body.dark-hero #nav.scrolled .logo-color { display:block; }
@@ -253,9 +248,8 @@
       .nav-logo img { height: 52px !important; }
       .nav-links, .nav-actions { display: none !important; }
       .nav-hamburger { display: flex !important; }
-      .nav-hamburger svg path { stroke: var(--black) !important; }
-      body.dark-hero #nav:not(.scrolled) .nav-hamburger svg path { stroke: #fff !important; }
-      body.dark-hero #nav:not(.scrolled) .nav-hamburger { border-color: rgba(255,255,255,0.3) !important; }
+      .hb-line { background: var(--black) !important; }
+      body.dark-hero #nav:not(.scrolled) .hb-line { background: #fff !important; }
       
       /* Hero padding compensation for smaller nav */
       .sector-hero, .svc-hero { padding: 110px 24px 60px !important; }
@@ -436,12 +430,10 @@
         </svg>
       </button></div>
 
-        <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-      <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 12L20 12"/>
-        <path d="M4 12H20"/>
-        <path d="M4 12H20"/>
-      </svg>
+            <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="hb-line"></span>
+      <span class="hb-line"></span>
+      <span class="hb-line"></span>
     </button>
   </div>
 </nav>
